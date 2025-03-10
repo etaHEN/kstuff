@@ -21,6 +21,13 @@
 #include "r0gdb.h"
 #include "offsets.h"
 
+
+void* (*kernel_dynlib_dlsym)(int pid, unsigned int handle, const char* sym) = NULL;
+int (*f_usleep)(unsigned int usec) = NULL;
+int (*printf)(const char* fmt, ...) = NULL;
+
+#define sleepy_printf(fmt, ...) do { printf(fmt, ##__VA_ARGS__); f_usleep(100* 1000); } while(0)
+
 #ifndef PS5KEK
 
 #define gettid() (*((int*(*)(void))dlsym((void*)0x1, "pthread_self"))())
@@ -1561,7 +1568,13 @@ int set_offsets(void);
 
 static void r0gdb_init_with_offsets(void)
 {
+    sleepy_printf("r0gdb_init_with_offsets\n");
+    sleepy_printf("before init_pipe\n");
+
     init_pipe();
+
+    sleepy_printf("after init_pipe\n");
+
     if(!victim_pktopts)
     {
         uint64_t fd;
@@ -1576,19 +1589,29 @@ static void r0gdb_init_with_offsets(void)
         copyout(&so_pcb, victim_sock+24, 8);
         copyout(&victim_pktopts, so_pcb+288, 8);
     }
+
+    sleepy_printf("setup victim_pktopts\n");
+    sleepy_printf("r0gdb_init_with_offsets done\n");
 }
 
 int r0gdb_init(void* ds, int a, int b, uintptr_t c, uintptr_t d)
 {
+    sleepy_printf("r0gdb_init\n");
+
     master_fd = a;
     victim_fd = b;
     victim_pktopts = c;
     kdata_base = d;
     if(!set_offsets())
     {
+        sleepy_printf("set_offsets success\n");
+
         r0gdb_init_with_offsets();
         return 0;
     }
+
+    sleepy_printf("set_offsets failed\n");
+
     return -1;
 }
 
