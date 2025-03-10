@@ -27,6 +27,16 @@ extern char tss[];
 extern char int1_handler[];
 extern char int13_handler[];
 extern uint64_t wrmsr_args;
+extern char shared_logs[];
+
+struct shared_mem 
+{
+    union 
+    {
+        uint64_t a;
+        unsigned char b[8];
+    };
+};
 
 void handle_syscall(uint64_t* regs, int allow_kekcall)
 {
@@ -62,9 +72,10 @@ void handle_syscall(uint64_t* regs, int allow_kekcall)
 #endif
     )
         handle_fself_syscall(regs);
-    else if(IS(nmount)
-         || IS(unmount))
-        handle_fpkg_syscall(regs);
+    else if(IS(nmount))
+        handle_fpkg_mount_syscall(regs);
+     else if(IS(unmount))
+        handle_fpkg_numount_syscall(regs);
     else if(IS(mprotect)
          || IS_PPR(mdbg_call))
         handle_syscall_fix(regs);
@@ -199,6 +210,7 @@ from_userspace:
 void main(uint64_t just_return)
 {
     uint64_t regs[NREGS];
+    
     copy_from_kernel(regs, trap_frame, sizeof(regs));
     uint64_t jr_frame[5];
     copy_from_kernel(jr_frame, just_return, 40);

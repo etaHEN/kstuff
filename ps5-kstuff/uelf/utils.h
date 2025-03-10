@@ -7,9 +7,11 @@
 extern uint64_t cr3_phys;
 extern uint64_t trap_frame;
 extern char pcpu[];
+extern char fwver[];
 
 extern char dmem[];
 #define DMEM dmem
+#define  CRASH() uint8_t(*p)() = NULL; p() // crash with page fault
 
 int virt2phys(uint64_t addr, uint64_t* phys, uint64_t* phys_limit);
 int copy_from_kernel(void* dst, uint64_t src, uint64_t sz);
@@ -45,6 +47,7 @@ static inline void push_stack(uint64_t* regs, const void* data, size_t sz)
 static inline void pop_stack(uint64_t* regs, void* data, size_t sz)
 {
     copy_from_kernel(data, regs[RSP], sz);
+    
     regs[RSP] += sz;
 }
 

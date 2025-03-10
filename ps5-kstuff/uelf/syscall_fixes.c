@@ -19,7 +19,7 @@ int try_handle_syscall_fix_trap(uint64_t* regs)
 {
     if(regs[RIP] == (uint64_t)mprotect_fix_start)
         regs[RIP] = (uint64_t)mprotect_fix_end;
-    else if(regs[RIP] == (uint64_t)mdbg_call_fix)
+    if(regs[RIP] == (uint64_t)mdbg_call_fix)
         regs[RAX] = 1;
     else
         return 0;
