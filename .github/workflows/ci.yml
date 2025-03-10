@@ -21,7 +21,7 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install dependencies
       run: |
@@ -39,7 +39,7 @@ jobs:
         bash ci-ps5-kstuff-ldr.sh
 
     - name: Upload Payload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Payload
         path: ./ps5-kstuff-ldr/kstuff.elf
