@@ -4,7 +4,6 @@
 //extern char kdata_base[];
 
 extern struct parasite_desc parasites;
-extern uint64_t sysentvec;
 
 static inline int handle_parasites(uint64_t* regs, int a, int b)
 {
@@ -15,8 +14,6 @@ static inline int handle_parasites(uint64_t* regs, int a, int b)
                 regs[parasites.parasites[j].reg] |= -1ull << 48;
             return 1;
         }
-
-        
     return 0;
 }
 
