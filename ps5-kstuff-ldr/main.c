@@ -24,7 +24,6 @@ along with this program; see the file COPYING. If not, see
 #include <machine/param.h>
 
 #include <ps5/payload.h>
-#include <ps5/kernel.h>
 
 #include "payload_bin.c"
 
@@ -100,35 +99,12 @@ int main() {
     void (*entry)(payload_args_t*) = base + ehdr->e_entry;
     payload_args_t* args = payload_get_args();
 
-    void* hacky_args = malloc(0x200);
-    if(!hacky_args) {
-        perror("malloc");
-        return EXIT_FAILURE;
-    }
-
-    memcpy(hacky_args, args, sizeof(payload_args_t));
-    uintptr_t* hack = (uintptr_t*)(hacky_args + sizeof(payload_args_t));
-    *hack = (uintptr_t)&kernel_dynlib_dlsym;
-
-    entry(hacky_args);
-    
+    entry(args);
     if(*args->payloadout == 0) {
         puts("patching app.db");
         *args->payloadout = patch_app_db();
-        puts("done");
     }
 
-
-    // printf("patching sysentvec from ldr...\n");
-
-    // const uint16_t data[1] = {0xdeb7};
-
-    // kernel_copyin(data, (uint64_t)(KERNEL_ADDRESS_DATA_BASE + 0xdf0be8 + 14), 2);
-
-    // kernel_copyin(data, (uint64_t)(KERNEL_ADDRESS_DATA_BASE + 0xdf0be8 + 14), 2);
-    
-    // printf("done\n");
-    
     exit(*args->payloadout);
 
     return EXIT_FAILURE;

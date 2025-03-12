@@ -1,13 +1,6 @@
 #include "r0gdb.h"
 #include "offsets.h"
 
-extern void* (*kernel_dynlib_dlsym)(int pid, unsigned int handle, const char* sym);
-extern int (*f_usleep)(unsigned int usec);
-extern int (*printf)(const char* fmt, ...);
-
-#define sleepy_printf(fmt, ...) do { printf(fmt, ##__VA_ARGS__); f_usleep(100* 1000); } while(0)
-
-
 struct offset_table offsets;
 extern uint64_t kdata_base;
 
@@ -1014,9 +1007,6 @@ void* dlsym(void*, const char*);
 int set_offsets(void)
 {
     uint32_t ver = r0gdb_get_fw_version() >> 16;
-
-    sleepy_printf("set_offsets: ver=%x\n", ver);
-
     switch(ver)
     {
 #ifndef NO_BUILTIN_OFFSETS

@@ -13,14 +13,6 @@
 #include "uelf/structs.h"
 #include "uelf/parasite_desc.h"
 
-
-extern void* (*kernel_dynlib_dlsym)(int pid, unsigned int handle, const char* sym);
-extern int (*f_usleep)(unsigned int usec);
-extern int (*printf)(const char* fmt, ...);
-
-#define sleepy_printf(fmt, ...) do { printf(fmt, ##__VA_ARGS__); f_usleep(100* 1000); } while(0)
-
-
 void* dlsym(void*, const char*);
 
 void notify(const char* s)
@@ -34,8 +26,9 @@ void notify(const char* s)
     } notification = {.f1 = -1};
     char* d = notification.msg;
     while(*d++ = *s++);
-    // ((void(*)())dlsym((void*)0x1, "sceKernelSendNotificationRequest"))(0, &notification, 0xc30, 0);
-    ((void(*)())kernel_dynlib_dlsym(-1, 0x1, "sceKernelSendNotificationRequest"))(0, &notification, 0xc30, 0);
+    int fd = open("/dev/notification0", 1);
+    write(fd, &notification, 0xc30);
+    close(fd);
 }
 
 void die(int line)
@@ -1103,15 +1096,8 @@ uint64_t bench(void)
     return rdtsc() - start;
 }
 
-int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynlib_dlsym)(int pid, unsigned int handle, const char* sym))
+int main(void* ds, int a, int b, uintptr_t c, uintptr_t d)
 {
-    kernel_dynlib_dlsym = t_kernel_dynlib_dlsym;
-    f_usleep = kernel_dynlib_dlsym(-1, 0x1, "usleep");
-    printf = kernel_dynlib_dlsym(-1, 0x2, "printf");
-    
-    sleepy_printf("before r0gdb_init\n");
-
-
     if(r0gdb_init(ds, a, b, c, d))
     {
         #ifndef FIRMWARE_PORTING
@@ -1119,32 +1105,18 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
         return 1;
         #endif
     }
-    sleepy_printf("after r0gdb_init\n");
-
 #ifdef PS5KEK
     extern uint64_t p_syscall;
     getpid();
     p_kekcall = (void*)p_syscall;
-    sleepy_printf("p_kekcall = (void*)p_syscall");
-#else
-    sleepy_printf("before p_kekcall assign\n");
-
-    
-    // p_kekcall = (char*)dlsym((void*)0x1, "getpid") + 7;
-    p_kekcall = (char*)kernel_dynlib_dlsym(-1, 0x1, "getpid") + 7;
-
-    sleepy_printf("after p_kekcall assign | p_kekcall = %p\n", p_kekcall);
-
+#else    
+    p_kekcall = (char*)dlsym((void*)0x1, "getpid") + 7;
 #endif
     if(!kekcall(0, 0, 0, 0, 0, 0, 0xffffffff00000027))
     {
         notify("ps5-kstuff is already loaded");
         return 1;
     }
-
-    sleepy_printf("after already loaded check\n");
-
-
     size_t desc_size = 0;
     struct parasite_desc* desc = get_parasites(&desc_size);
     if(!desc)
@@ -1152,21 +1124,9 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
         notify("your firmware is not supported (ps5-kstuff)");
         return 1;
     }
-
-    sleepy_printf("after get_parasites\n");
-
-
     size_t n_shellcore_patches;
     uint64_t shellcore_eh_frame_offset = get_eh_frame_offset("/system/vsh/SceShellCore.elf");
-
-    sleepy_printf("after get_eh_frame_offset | shellcore_eh_frame_offset = %p\n", shellcore_eh_frame_offset);
-
-
     const struct shellcore_patch* shellcore_patches = get_shellcore_patches(&n_shellcore_patches);
-
-    sleepy_printf("after get_shellcore_patches | n_shellcore_patches = %d\n", n_shellcore_patches);
-
-
     if(n_shellcore_patches && !shellcore_patches)
     {
 #ifdef FIRMWARE_PORTING
@@ -1179,10 +1139,6 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
 #ifdef FIRMWARE_PORTING
     dbg_enter();
 #endif
-
-    sleepy_printf("before various copyouts\n");
-
-
     uint64_t percpu_ist4[NCPUS];
     for(int cpu = 0; cpu < NCPUS; cpu++)
         copyout(&percpu_ist4[cpu], TSS(cpu)+28+4*8, 8);
@@ -1192,18 +1148,10 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
     uint64_t int13_handler;
     copyout(&int13_handler, IDT+16*13, 2);
     copyout((char*)&int13_handler + 2, IDT+16*13+6, 6);
-
-    sleepy_printf("after various copyouts\n");
-
-
 #ifndef FIRMWARE_PORTING
     dbg_enter();
 #endif
     gdb_remote_syscall("write", 3, 0, (uintptr_t)1, (uintptr_t)"allocating kernel memory... ", (uintptr_t)28);
-    
-    sleepy_printf("before r0gdb_kmalloc\n");
-
-    
     for(int i = 0; i < 0x300; i += 2)
         r0gdb_kmalloc(0x100);
     for(int i = 0; i < 2; i += 2)
@@ -1212,10 +1160,6 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
             mem_blocks[i] = r0gdb_kmalloc(1<<23);
         mem_blocks[i+1] = (mem_blocks[i] ? mem_blocks[i] + (1<<23) : 0);
     }
-    
-    sleepy_printf("after r0gdb_kmalloc\n");
-
-    
     gdb_remote_syscall("write", 3, 0, (uintptr_t)1, (uintptr_t)"done\n", (uintptr_t)5);
     uint64_t comparison_table_base = (uint64_t)kmalloc(131072);
     uint64_t comparison_table = ((comparison_table_base - 1) | 65535) + 1;
@@ -1231,18 +1175,10 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
         shared_area = comparison_table - 4096;
     else
         shared_area = comparison_table + 65536;
-
-    sleepy_printf("idk1 part 1\n");
-
-
     kmemzero((void*)shared_area, 4096);
     uint64_t uelf_virt_base = (find_empty_pml4_index(0) << 39) | (-1ull << 48);
     uint64_t dmem_virt_base = (find_empty_pml4_index(1) << 39) | (-1ull << 48);
     shared_area = virt2phys(shared_area) + dmem_virt_base;
-    
-    sleepy_printf("idk1 part 2\n");
-
-
     uint64_t kelf_parasite_desc = (uint64_t)kmalloc(8192);
     kelf_parasite_desc = ((kelf_parasite_desc - 1) | 4095) + 1;
     for(int i = 0; i < desc->lim_total; i++)
@@ -1271,11 +1207,6 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
 #undef OFFSET
         0,
     };
-
-    
-    sleepy_printf("idk1 part 3\n");
-
-
     uint64_t values[] = {
         comparison_table,      // comparison_table
         dmem_virt_base,        // dmem
@@ -1297,10 +1228,6 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
 #undef OFFSET
         0,
     };
-
-    sleepy_printf("idk1 part 4\n");
-
-
     size_t pcpu_idx, uelf_cr3_idx, uelf_entry_idx, ist_errc_idx, ist_noerrc_idx, ist4_idx, tss_idx;
     for(size_t i = 0; values[i]; i++)
         switch(values[i])
@@ -1317,14 +1244,8 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
     uint64_t kelf_bases[NCPUS];
     uint64_t kelf_entries[NCPUS];
     uint64_t uelf_cr3s[NCPUS];
-
-    sleepy_printf("idk1 part 5\n");
-
-
     for(int cpu = 0; cpu < NCPUS; cpu++)
     {
-        sleepy_printf("loading kelf on cpu %d...\n", cpu);
-
         char buf[] = "loading on cpu ..\n";
         if(cpu >= 10)
         {
@@ -1363,10 +1284,6 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
     }
     r0gdb_wrmsr(0xc0000084, r0gdb_rdmsr(0xc0000084) | 0x100);
     gdb_remote_syscall("write", 3, 0, (uintptr_t)1, (uintptr_t)"done loading\npatching idt... ", (uintptr_t)29);
-    
-    sleepy_printf("done loading kelf\n");
-    sleepy_printf("before patching idt\n");
-
     uint64_t cr3 = r0gdb_read_cr3();
     for(int cpu = 0; cpu < NCPUS; cpu++)
     {
@@ -1384,73 +1301,25 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
     kmemcpy((char*)(IDT+16*2), (char*)&iret, 2);
     kmemcpy((char*)(IDT+16*2+6), (char*)&iret+2, 6);
     //kmemzero((char*)(IDT+16*1), 16);
-
-    sleepy_printf("after patching idt\n");
-    sleepy_printf("before patching kdata\n");
-
-    sleepy_printf("waiting 5s to make sure the freezing is not caused by an earlier patch with a delay\n");
-
-
     gdb_remote_syscall("write", 3, 0, (uintptr_t)1, (uintptr_t)"done\napplying kdata patches... ", (uintptr_t)31);
-    {
-        //enable debug settings & spoof target
-        uint32_t q = 0;
-        
-        sleepy_printf("before offsets.security_flags copyout\n");
-
-        
-        copyout(&q, offsets.security_flags, 4);
-        
-        q |= 0x14;
-
-        sleepy_printf("before offsets.security_flags copyin\n");
-
-        
-        copyin(offsets.security_flags, &q, 4);
-    }
-
-    sleepy_printf("before patching offsets.sysentvec + 14 (%#02lx)\n", offsets.sysentvec_ps4);
-
     copyin(offsets.sysentvec + 14, &(const uint16_t[1]){0xdeb7}, 2); //native sysentvec
     copyin(offsets.sysentvec_ps4 + 14, &(const uint16_t[1]){0xdeb7}, 2); //ps4 sysentvec
     copyin(offsets.crypt_singleton_array + 11*8 + 2*8 + 6, &(const uint16_t[1]){0xdeb7}, 2); //crypt xts
     copyin(offsets.crypt_singleton_array + 11*8 + 9*8 + 6, &(const uint16_t[1]){0xdeb7}, 2); //crypt hmac
-
     {
-        sleepy_printf("before offsets.targetid copyin\n");
-
-        
-        copyin(offsets.targetid, "\x82", 1);
-
-        sleepy_printf("before offsets.qa_flags copyout\n");
-
-
+        //enable debug settings & spoof target
         uint32_t q = 0;
-
+        copyout(&q, offsets.security_flags, 4);
+        q |= 0x14;        
+        copyin(offsets.security_flags, &q, 4);
+        copyin(offsets.targetid, "\x82", 1);
         copyout(&q, offsets.qa_flags, 4);
         q |= 0x1030300;
-
-        sleepy_printf("before offsets.utoken copyin\n");
-
-
         copyin(offsets.qa_flags, &q, 4);
-
-        sleepy_printf("before offsets.utoken copyout\n");
-
-
         copyout(&q, offsets.utoken, 4);
         q |= 1;
-
-        sleepy_printf("before offsets.utoken copyin\n");
-
-
         copyin(offsets.utoken, &q, 4);
     }
-
-    sleepy_printf("after patching kdata\n");
-    sleepy_printf("before patching shellcore\n");
-
-
     gdb_remote_syscall("write", 3, 0, (uintptr_t)1, (uintptr_t)"done\npatching shellcore... ", (uintptr_t)27);
     //restore the gdb_stub's SIGTRAP handler
     struct sigaction sa;
@@ -1462,17 +1331,12 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d, void* (*t_kernel_dynl
     copyin(IDT+16*9+5, "\x8e", 1);
     copyin(IDT+16*179+5, "\x8e", 1);
     patch_shellcore(shellcore_patches, n_shellcore_patches, shellcore_eh_frame_offset);
-    
-    sleepy_printf("after patching shellcore\n");
-
     gdb_remote_syscall("write", 3, 0, (uintptr_t)1, (uintptr_t)"done\npatching app.db... ", (uintptr_t)24);
     #ifndef FIRMWARE_PORTING
-    // patch_app_db();
+    //patch_app_db();
     #endif
     gdb_remote_syscall("write", 3, 0, (uintptr_t)1, (uintptr_t)"done\n", (uintptr_t)5);
     #ifndef DEBUG
-    sleepy_printf("ps5-kstuff successfully loaded\n");
-
     notify("ps5-kstuff successfully loaded");
     return 0;
 #endif
