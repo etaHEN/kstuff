@@ -387,6 +387,17 @@ static struct shellcore_patch shellcore_patches_300[] = {
     {0x1968c1, "\xe8\x4a\xde\x42\x00\x31\xc9\xff\xc1\xe9\x12\x01\x00\x00", 14},
     {0x1969e1, "\x83\xf8\x02\x0f\x43\xc1\xe9\xff\xfb\xff\xff", 11},
     {0x1965c9, "\xe9\xf3\x02\x00\x00", 5},
+    {0x25284B, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x2528C8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x2529CB, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x252A9F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x252F35, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x253120, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2534E5, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x253582, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x4DEF37, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x4DF04C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x4E0F87, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_310[] = {
@@ -421,6 +432,17 @@ static struct shellcore_patch shellcore_patches_320[] = {
     {0x1968c1, "\xe8\x3a\xe1\x42\x00\x31\xc9\xff\xc1\xe9\x12\x01\x00\x00", 14},
     {0x1969e1, "\x83\xf8\x02\x0f\x43\xc1\xe9\xff\xfb\xff\xff", 11},
     {0x1965c9, "\xe9\xf3\x02\x00\x00", 5},
+    {0x25293B, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x2529B8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x252ABB, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x252B8F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x253025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x253210, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2535D5, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x253672, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x4DF207, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x4DF31C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x4E1257, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_321[] = {
@@ -438,6 +460,17 @@ static struct shellcore_patch shellcore_patches_321[] = {
     {0x1968c1, "\xe8\x3a\xe1\x42\x00\x31\xc9\xff\xc1\xe9\x12\x01\x00\x00", 14},
     {0x1969e1, "\x83\xf8\x02\x0f\x43\xc1\xe9\xff\xfb\xff\xff", 11},
     {0x1965c9, "\xe9\xf3\x02\x00\x00", 5},
+    {0x25293B, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x2529B8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x252ABB, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x252B8F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x253025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x253210, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2535D5, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x253672, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x4DF207, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x4DF31C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x4E1257, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_400[] = {
@@ -455,6 +488,17 @@ static struct shellcore_patch shellcore_patches_400[] = {
     {0x1a12d1, "\xe8\xea\x88\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14},
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11},
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5},
+    {0x267DBB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x267E52, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x267F6B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x26803F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x2684A8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x268679, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x268A45, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5329AC, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x534937, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_402[] = {
@@ -472,6 +516,17 @@ static struct shellcore_patch shellcore_patches_402[] = {
     {0x1a12d1, "\xe8\xea\x88\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14},
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11},
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5},
+    {0x267DBB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x267E52, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x267F6B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x26803F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x2684A8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x268679, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x268A45, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5329AC, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x534937, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_403[] = {
@@ -489,6 +544,17 @@ static struct shellcore_patch shellcore_patches_403[] = {
     {0x1a12d1, "\xe8\xea\x88\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14}, //call 0x619bc0; xor ecx, ecx; inc ecx; jmp 0x1a15d3
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11}, //cmp eax, 2; cmovae eax, ecx; jmp 0x1a1007
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5}, //jmp 0x1a12d1
+    {0x267DBB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x267E52, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x267F6B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x26803F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x2684A8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x268679, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x268A45, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5329AC, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x534937, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_450[] = {
@@ -505,6 +571,17 @@ static struct shellcore_patch shellcore_patches_450[] = {
     {0x1a12d1, "\xe8\xfa\x88\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14}, //call 0x619bd0; xor ecx, ecx; inc ecx; jmp 0x1a15d3
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11}, //cmp eax, 2; cmovae eax, ecx; jmp 0x1a1007
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5}, //jmp 0x1a12d1
+    {0x2684EB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x268582, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x26869B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x26876F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x268BD8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x268DA9, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x269175, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x269212, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x533147, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x53325C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5351E7, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_451[] = {
@@ -521,6 +598,17 @@ static struct shellcore_patch shellcore_patches_451[] = {
     {0x1a12d1, "\xe8\x0a\x89\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14}, //call 0x619be0; xor ecx, ecx; inc ecx; jmp 0x1a15d3
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11}, //cmp eax, 2; cmovae eax, ecx; jmp 0x1a1007
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5}, //jmp 0x1a12d1
+    {0x2684EB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x268582, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x26869B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x26876F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x268BD8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x268DA9, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x269175, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x269212, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x533137, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x53324C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5351D7, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_500[] = {
@@ -538,6 +626,17 @@ static struct shellcore_patch shellcore_patches_500[] = {
     {0x1c33c1, "\xe8\xea\x7d\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c35f3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c30ee, "\xe9\xce\x02\x00\x00", 5},
+    {0x298CDB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x298D58, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x298E5B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x299396, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x299567, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x299935, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x2999D2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x59D747, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x59D85C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5A02E0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_502[] = {
@@ -555,6 +654,17 @@ static struct shellcore_patch shellcore_patches_502[] = {
     {0x1c33c1, "\xe8\xda\x7d\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c35f3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c30ee, "\xe9\xce\x02\x00\x00", 5},
+    {0x298CDB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x298D58, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x298E5B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x299396, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x299567, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x299935, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x2999D2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x59D737, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x59D84C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5A02D0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_510[] = {
@@ -572,10 +682,21 @@ static struct shellcore_patch shellcore_patches_510[] = {
     {0x1c3511, "\xe8\xea\xac\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c3743, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c323e, "\xe9\xce\x02\x00\x00", 5},
+    {0x299BAB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x299C28, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x299D2B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x29A266, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x29A437, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x29A805, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x29A8A2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x5A0207, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5A031C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5A2DA0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_550[] = {
-    {0xa319ee, "\x52\xeb\x08\x66\x90", 5}, // C080
+    {0xa319ee, "\x52\xeb\x08\x66\x90", 5},
     {0xa319f9, "\xe8\x22\xfb\xff\xff\x58\xc3", 7},
     {0xa31511, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa314f9, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -589,6 +710,17 @@ static struct shellcore_patch shellcore_patches_550[] = {
     {0x1c3511, "\xe8\xba\xb4\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c3743, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c323e, "\xe9\xce\x02\x00\x00", 5},
+    {0x299BAB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x299C28, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x299D2B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x29A266, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x29A437, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x29A805, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x29A8A2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x5A0207, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5A031C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5A2DA0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 extern char _start[];
