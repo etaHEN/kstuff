@@ -455,82 +455,76 @@ DEF(utoken, 0x6505500)
 END_FW()
 
 START_FW(403)
-DEF(allproc, 0x27edcb8)
-DEF(idt, 0x64cdc80)
-DEF(gdt_array, 0x64cee30)
-DEF(tss_array, 0x64d0830)
-DEF(pcpu_array, 0x64d2280)
-DEF(doreti_iret, -0x9cf84c)
-DEF(add_rsp_iret, doreti_iret - 7)
-DEF(swapgs_add_rsp_iret, doreti_iret - 10)
-DEF(rep_movsb_pop_rbp_ret, -0x99002a /*-0x990a55*/)
-DEF(rdmsr_start, -0x9d0cfa /*-0x9d6d02*/)
-//DEF(rdmsr_end, -0x9d6cf9)
-DEF(wrmsr_ret, -0x9d20cc)
-DEF(dr2gpr_start, -0x9d6d93)
-//DEF(dr2gpr_end, -0x9d6d7c)
-DEF(gpr2dr_1_start, -0x9d6c7a)
-//DEF(gpr2dr_1_end, -0x9d6c55)
-DEF(gpr2dr_2_start, -0x9d6b87)
-//DEF(gpr2dr_2_end, -0x9d6de9)
-DEF(mov_cr3_rax, -0x396f9e)
-DEF(mov_rdi_cr3, -0x39700e)
-DEF(nop_ret, wrmsr_ret + 2 /*-0x28a3a0*/)
-DEF(cpu_switch, -0x9d6f80)
-DEF(mprotect_fix_start, -0x90ac61)
+DEF(allproc, 0x27edcb8) //data 0x33EDCB8
+DEF(idt, 0x64cdc80) //data 0x70CDC80
+DEF(gdt_array, 0x64cee30) //data 0x70CEE30
+DEF(tss_array, 0x64d0830) //data 0x70D0830
+DEF(pcpu_array, 0x64d2280) //data 0x70D2280
+DEF(doreti_iret, -0x9cf84c) //data 0x2307B4
+DEF(add_rsp_iret, doreti_iret - 7) //data 0x2307AD
+DEF(swapgs_add_rsp_iret, doreti_iret - 10) //data 0x2307B4
+DEF(rep_movsb_pop_rbp_ret, -0x99002a) //data 0x26FFD6
+DEF(rdmsr_start, -0x9d0cfa) //data 0x22F306
+DEF(wrmsr_ret, -0x9d20cc) //data 0x22DF34
+DEF(dr2gpr_start, -0x9d6d93) //data 0x22926D
+DEF(gpr2dr_1_start, -0x9d6c7a) //data 0x229386
+DEF(gpr2dr_2_start, -0x9d6b87) //data 0x229479
+DEF(mov_cr3_rax, -0x396f9e) //data 0x869062
+DEF(mov_rdi_cr3, -0x39700e) //data 0x868FF2
+DEF(nop_ret, wrmsr_ret + 2) //data 0x22DF36
+DEF(cpu_switch, -0x9d6f80) //data 0x229080
+DEF(mprotect_fix_start, -0x90ac61) //data 0x2F539F
 DEF(mprotect_fix_end, mprotect_fix_start+6)
 DEF(mmap_self_fix_1_start, -0x2cd31d)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1df2ce)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
-DEF(sigaction_fix_start, -0x6c2989)
-DEF(sigaction_fix_end, -0x6c2933)
-DEF(sysents, 0x1709c0)
-DEF(sysents_ps4, 0x168410)
-DEF(sysentvec, 0xd11bb8)
-DEF(sysentvec_ps4, 0xd11d30)
-DEF(sceSblServiceMailbox, -0x6824c0)
-DEF(sceSblAuthMgrSmIsLoadable2, -0x8a5c40)
-DEF(mdbg_call_fix, -0x631ea9)
-DEF(syscall_before, -0x802311)
-DEF(syscall_after, -0x8022ee)
-DEF(malloc, -0xa9b00)
-DEF(M_something, 0x1346080)
-DEF(loadSelfSegment_epilogue, -0x8a54cd)
-DEF(loadSelfSegment_watchpoint, -0x2cc918)
-DEF(loadSelfSegment_watchpoint_lr, -0x8a5727)
-//DEF(decryptSelfBlock_watchpoint, -0x2cc88e)
-DEF(decryptSelfBlock_watchpoint_lr, -0x8a538a)
-DEF(decryptSelfBlock_epilogue, -0x8a52c3)
-DEF(decryptMultipleSelfBlocks_watchpoint_lr, -0x8a4c55)
-DEF(decryptMultipleSelfBlocks_epilogue, -0x8a47d2)
-DEF(sceSblServiceMailbox_lr_verifyHeader, -0x8a58bc)
-DEF(sceSblServiceMailbox_lr_loadSelfSegment, -0x8a5541)
-DEF(sceSblServiceMailbox_lr_decryptSelfBlock, -0x8a5014)
-DEF(sceSblServiceMailbox_lr_decryptMultipleSelfBlocks, -0x8a488c)
-DEF(sceSblServiceMailbox_lr_sceSblAuthMgrSmFinalize, -0x8a5cbe)
-DEF(sceSblServiceMailbox_lr_verifySuperBlock, -0x94a7f0)
-DEF(sceSblServiceMailbox_lr_sceSblPfsClearKey_1, -0x94ada4)
-DEF(sceSblServiceMailbox_lr_sceSblPfsClearKey_2, -0x94ad2e)
-DEF(sceSblPfsSetKeys, -0x94aaa0)
-//DEF(panic, -0x21020)
-DEF(sceSblServiceCryptAsync, -0x8ed940)
-DEF(sceSblServiceCryptAsync_deref_singleton, -0x8ed902)
-DEF(copyin, -0x9908e0)
-DEF(copyout, -0x990990)
-DEF(crypt_message_resolve, -0x479d60)
-DEF(justreturn, -0x9cf990)
-DEF(justreturn_pop, justreturn+8)
-DEF(mini_syscore_header, 0xdc16e8)
-DEF(pop_all_iret, -0x9cf8ab)
-DEF(pop_all_except_rdi_iret, pop_all_iret+4)
-DEF(push_pop_all_iret, -0x96be70)
-DEF(kernel_pmap_store, 0x3257a78)
-DEF(crypt_singleton_array, 0x2e31830)
-DEF(security_flags, 0x6506474)
-DEF(targetid, 0x650647d)
-DEF(qa_flags, 0x6506498)
-DEF(utoken, 0x6506500)
+DEF(sigaction_fix_start, -0x6c2989) //data 0x53D677
+DEF(sigaction_fix_end, -0x6c2933) //data 0x53D6CD
+DEF(sysents, 0x1709c0) //data 0xD709C0
+DEF(sysents_ps4, 0x168410) //data 0xD68410
+DEF(sysentvec, 0xd11bb8) //data 0x1911BB8
+DEF(sysentvec_ps4, 0xd11d30) //data 0x1911D30
+DEF(sceSblServiceMailbox, -0x6824c0) //data 0x57DB40
+DEF(sceSblAuthMgrSmIsLoadable2, -0x8a5c40) //data 0x35A3C0
+DEF(mdbg_call_fix, -0x631ea9) //data 0x5CE157
+DEF(syscall_before, -0x802311) //data 0x3FDCEF
+DEF(syscall_after, -0x8022ee) //data 0x3FDD12
+DEF(malloc, -0xa9b00) //data 0xB56500
+DEF(M_something, 0x1346080) //data 0x1F46080
+DEF(loadSelfSegment_epilogue, -0x8a54cd) //data 0x35AB33
+DEF(loadSelfSegment_watchpoint, -0x2cc918) //data 0x9336E8
+DEF(loadSelfSegment_watchpoint_lr, -0x8a5727) //data 0x35A8D9
+DEF(decryptSelfBlock_watchpoint_lr, -0x8a538a) //data 0x35AC76
+DEF(decryptSelfBlock_epilogue, -0x8a52c3) //data 0x35AD3D
+DEF(decryptMultipleSelfBlocks_watchpoint_lr, -0x8a4c55) //data 0x35B3AB
+DEF(decryptMultipleSelfBlocks_epilogue, -0x8a47d2) //data 0x35B82E
+DEF(sceSblServiceMailbox_lr_verifyHeader, -0x8a58bc) //data 0x35A744
+DEF(sceSblServiceMailbox_lr_loadSelfSegment, -0x8a5541) //data 0x35AABF
+DEF(sceSblServiceMailbox_lr_decryptSelfBlock, -0x8a5014) //data 0x35AFEC
+DEF(sceSblServiceMailbox_lr_decryptMultipleSelfBlocks, -0x8a488c) //data 0x35B774
+DEF(sceSblServiceMailbox_lr_sceSblAuthMgrSmFinalize, -0x8a5cbe) //data 0x35A342
+DEF(sceSblServiceMailbox_lr_verifySuperBlock, -0x94a7f0) //data 0x2B5810
+DEF(sceSblServiceMailbox_lr_sceSblPfsClearKey_1, -0x94ada4) //data 0x2B525C
+DEF(sceSblServiceMailbox_lr_sceSblPfsClearKey_2, -0x94ad2e) //data 0x2B52D2
+DEF(sceSblPfsSetKeys, -0x94aaa0) //data 0x2B5560
+DEF(sceSblServiceCryptAsync, -0x8ed940) //data 0x3126C0
+DEF(sceSblServiceCryptAsync_deref_singleton, -0x8ed902) //data 0x3126FE
+DEF(copyin, -0x9908e0) //data 0x26F720
+DEF(copyout, -0x990990) //data 0x26F670
+DEF(crypt_message_resolve, -0x479d60) //data 0x7862A0
+DEF(justreturn, -0x9cf990) //data 0x230670
+DEF(justreturn_pop, justreturn+8) //data 0x230678
+DEF(mini_syscore_header, 0xdc16e8) //data 0x19C16E8
+DEF(pop_all_iret, -0x9cf8ab) //data 0x230755
+DEF(pop_all_except_rdi_iret, pop_all_iret+4) //data 0x230759
+DEF(push_pop_all_iret, -0x96be70) //data 0x294190
+DEF(kernel_pmap_store, 0x3257a78) //data 0x3E57A78
+DEF(crypt_singleton_array, 0x2e31830) //data 0x3A31830
+DEF(security_flags, 0x6506474) //data 0x7106474
+DEF(targetid, 0x650647d) //data 0x710647D
+DEF(qa_flags, 0x6506498) //data 0x7106498
+DEF(utoken, 0x6506500) //data 0x7106500
 #include "offset_list.txt"
 END_FW()
 
@@ -1002,6 +996,84 @@ DEF(utoken, 0x6646778)
 #include "offset_list.txt"
 END_FW()
 
+START_FW(650)
+DEF(allproc, 0x2869d20) //data 0x34C9D20
+DEF(idt, 0x655dde0) //data 0x71BDDE0
+DEF(gdt_array, 0x655f000) //data 0x71BF000
+DEF(tss_array, 0x6560a00) //data 0x71C0A00
+DEF(pcpu_array, 0x6572880) //data 0x71D2880
+DEF(doreti_iret, -0xa1b813) //data 0x2447ED
+DEF(add_rsp_iret, doreti_iret - 7) //data 0x2247E6
+DEF(swapgs_add_rsp_iret, doreti_iret - 10) //data 0x2247E3
+DEF(rep_movsb_pop_rbp_ret, -0x9dbfea) //data 0x284016
+DEF(rdmsr_start, -0xa1cdaa) //data 0x243256
+DEF(wrmsr_ret, -0xa1e17c) //data 0x241E84
+DEF(dr2gpr_start, -0xa22793) //data 0x23D86D
+DEF(gpr2dr_1_start, -0xa2267a) //data 0x23D986
+DEF(gpr2dr_2_start, -0xa22587) //data 0x23DA79
+DEF(mov_cr3_rax, -0x3aa0de) //data 0x8B5F22
+DEF(mov_rdi_cr3, -0x3aa14e) //data 0x8B5EB2
+DEF(nop_ret, wrmsr_ret + 2) //data 0x241E86
+DEF(cpu_switch, -0xa22980) //data 0x23D680
+DEF(mprotect_fix_start, -0x9546e2) //data 0x30B91E
+DEF(mprotect_fix_end, mprotect_fix_start+6) //data 0x30B924
+
+DEF(mmap_self_fix_1_start, 0x0)
+DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
+DEF(mmap_self_fix_2_start, 0x0)
+DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(sigaction_fix_start, -0x6f6b12) //data 0x5694EE
+DEF(sigaction_fix_end, -0x6f6ae8) //data 0x569518
+DEF(sysents, 0x1b49f0) //data 0xE149F0
+DEF(sysents_ps4, 0x1ac440) //data 0xE0C440
+DEF(sysentvec, 0xe210a8) //data 0x1A810A8
+DEF(sysentvec_ps4, 0xe21220) //data 0x1A81220
+DEF(sceSblServiceMailbox, -0x6b2790) //data 0x5AD870
+DEF(sceSblAuthMgrSmIsLoadable2, -0x8ed100) //data 0x372F00
+DEF(mdbg_call_fix, -0x65c199) //data 0x603E67
+DEF(syscall_before, -0x844a51) //data 0x41B5AF
+DEF(syscall_after, -0x844a2e) //data 0x41B5D2
+DEF(malloc, -0xa9d40) //data 0xBB62C0
+DEF(M_something, 0x1456690) //data 0x20B6690
+DEF(loadSelfSegment_epilogue, -0x8ec9cd) //data 0x373633
+DEF(loadSelfSegment_watchpoint, -0x2da218) //data 0x985DE8
+DEF(loadSelfSegment_watchpoint_lr, -0x8ecc27) //data 0x3733D9
+DEF(decryptSelfBlock_watchpoint_lr, -0x8ec89f) //data 0x373761
+DEF(decryptSelfBlock_epilogue, -0x8ec7e2) //data 0x37381E
+//DEF(decryptMultipleSelfBlocks_watchpoint_lr, -0x8ec152) //data 0x373EAE //403
+DEF(decryptMultipleSelfBlocks_watchpoint_lr, -0x8ec159) //data 0x373EA7 //550
+DEF(decryptMultipleSelfBlocks_epilogue, -0x8ebf24) //data 0x3740DC
+DEF(sceSblServiceMailbox_lr_verifyHeader, -0x8ecdb9) //data 0x373247
+DEF(sceSblServiceMailbox_lr_loadSelfSegment, -0x8eca41) //data 0x3735BF
+DEF(sceSblServiceMailbox_lr_decryptSelfBlock, -0x8ec479) //data 0x373B87
+DEF(sceSblServiceMailbox_lr_decryptMultipleSelfBlocks, -0x8ebc88) //data 0x374378
+DEF(sceSblServiceMailbox_lr_sceSblAuthMgrSmFinalize, -0x8ed17e) //data 0x372E82
+DEF(sceSblServiceMailbox_lr_verifySuperBlock, -0x995381) //data 0x2CAC7F
+DEF(sceSblServiceMailbox_lr_sceSblPfsClearKey_1, -0x995931) //data 0x2CA6CF
+DEF(sceSblServiceMailbox_lr_sceSblPfsClearKey_2, -0x9958bb) //data 0x2CA745
+//DEF(sceSblPfsSetKeys, -0x995630) //data 0x2CA9D0 //403
+DEF(sceSblPfsSetKeys, -0x996400) //data 0x2C9C00 //550
+DEF(sceSblServiceCryptAsync, -0x936090) //data 0x329F70
+DEF(sceSblServiceCryptAsync_deref_singleton, -0x936052) //data 0x329FAE
+DEF(copyin, -0x9dc8a0) //data 0x283760
+DEF(copyout, -0x9dc950) //data 0x2836B0
+DEF(crypt_message_resolve, -0x490060) //data 0x7CFFA0
+DEF(justreturn, -0xa1ba40) //data 0x2445C0
+DEF(justreturn_pop, justreturn+8) //data 0x2445C8
+DEF(mini_syscore_header, 0xed2048) //data 0x1B32048
+DEF(pop_all_iret, -0xa1b872) //data 0x24478E
+DEF(pop_all_except_rdi_iret, pop_all_iret+4) //data 0x244792
+DEF(push_pop_all_iret, -0x9ba368) //data 0x2A5C98
+DEF(kernel_pmap_store, 0x32e4358) //data 0x3F44358
+DEF(crypt_singleton_array, 0x2e9d830) //data 0x3AFD830
+DEF(security_flags, 0x65968ec) //data 0x71F68EC
+DEF(targetid, 0x65968f5) //data 0x71F68F5
+DEF(qa_flags, 0x6596910) //data 0x71F6910
+DEF(utoken, 0x6596978) //data 0x71F6978
+#include "offset_list.txt"
+END_FW()
+
 void* dlsym(void*, const char*);
 
 int set_offsets(void)
@@ -1023,6 +1095,7 @@ int set_offsets(void)
     case 0x502: set_offsets_502(); break;
     case 0x510: set_offsets_510(); break;
     case 0x550: set_offsets_550(); break;
+    case 0x650: set_offsets_650(); break;
 #endif
     default: return -1;
     }

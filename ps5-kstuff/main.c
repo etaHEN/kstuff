@@ -723,6 +723,34 @@ static struct shellcore_patch shellcore_patches_550[] = {
     {0x5A2DA0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
+static struct shellcore_patch shellcore_patches_650[] = {
+    {0xa7dade, "\x52\xeb\x08\x66\x90", 3}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xa7dae9, "\xe8\x82\xfa\xff\xff\x58\xc3", 7},
+    {0xa7d561, "\x31\xc0\x50\xeb\xe3", 5},
+    {0xa7d549, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
+    {0x5d2c24, "\xeb\x04", 2},
+    {0x2c09f2, "\xeb\x04", 2},
+    {0x2c0e32, "\xeb\x04", 2},
+    {0x5f022f, "\xeb", 1},
+    {0x5d9c7d, "\x90\xe9", 2},
+    {0x5f0f60, "\xeb", 1},
+    {0x5f24fa, "\x3b\x01\x00\x00", 4},
+    {0x1d8c71, "\xe8\xea\xaf\x4e\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
+    {0x1d8ea3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xc5\xfb\xff\xff", 11},
+    {0x1d897e, "\xe9\xee\x02\x00\x00", 5},
+    {0x2b943b, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x2b94b8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x2b95bb, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x2b968f, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x2b9af0, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x2b9cc0, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2ba095, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x2ba132, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x5d4367, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5d447c, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5d72e0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+};
+
 extern char _start[];
 
 static void relocate_shellcore_patches(struct shellcore_patch* patches, size_t n_patches)
@@ -801,6 +829,7 @@ static const struct shellcore_patch* get_shellcore_patches(size_t* n_patches)
     FW(502);
     FW(510);
     FW(550);
+    FW(650);
     default:
         *n_patches = 1;
         return 0;
@@ -1155,6 +1184,32 @@ static struct PARASITES(14) parasites_550 = {
     }
 };
 
+static struct PARASITES(14) parasites_650 = {
+    .lim_syscall = 3,
+    .lim_fself = 12,
+    .lim_total = 14,
+    .parasites = {
+        /* syscall parasites */
+        //{-0x844fac, RDI}, //data 0x41B054
+        {-0x844fac, R13}, //data 0x41B054
+        {-0x39b92c, RSI}, //data 0x8C46D4
+        {-0x39b8ec, RSI}, //data 0x8C4714
+        /* fself parasites */
+        {-0x2da016, RAX}, //data 0x985FEA
+        {-0x2dab6a, RAX}, //data 0x985496
+        {-0x2daa30, RAX}, //data 0x9855D0
+        {-0x2da793, RAX}, //data 0x98586D
+        {-0x2da4ad, RAX}, //data 0x985B53
+        {-0x2da18e, RDX}, //data 0x985E72
+        {-0x2da182, RCX}, //data 0x985E7E
+        {-0x9dcad0, RDI}, //data 0x283530
+        {-0x2da5e6, R10}, //data 0x985A1A
+        /* unsorted parasites */
+        {-0x48fd0e, RAX}, //data 0x7D02F2
+        {-0x48fd0e, R15}, //data 0x7D02F2
+    }
+};
+
 static struct parasite_desc* get_parasites(size_t* desc_size)
 {
     uint32_t ver = r0gdb_get_fw_version() >> 16;
@@ -1200,6 +1255,9 @@ static struct parasite_desc* get_parasites(size_t* desc_size)
     case 0x550:
         *desc_size = sizeof(parasites_550);
         return (void*)&parasites_550;
+    case 0x650:
+        *desc_size = sizeof(parasites_650);
+        return (void*)&parasites_650;
     default:
         return 0;
 #else

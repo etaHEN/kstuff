@@ -179,13 +179,13 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     {
         uint64_t ctx[8];
      
-        if ((uint64_t) fwver < 0x500)
+        if (fwver >= 0x500 && fwver <= 0x761) 
         {
-            copy_from_kernel(ctx, kpeek64(regs[RBP] - sceSblServiceMailbox_decryptSelfBlock_rsp_to_rbp + sceSblServiceMailbox_decryptSelfBlock_rsp_to_self_context), sizeof(ctx));
+            copy_from_kernel(ctx, kpeek64(regs[RBP] - 192), sizeof(ctx));
         }
         else
         {
-            copy_from_kernel(ctx, kpeek64(regs[RBP] - 192), sizeof(ctx));
+            copy_from_kernel(ctx, kpeek64(regs[RBP] - sceSblServiceMailbox_decryptSelfBlock_rsp_to_rbp + sceSblServiceMailbox_decryptSelfBlock_rsp_to_self_context), sizeof(ctx));
         }
 
         if(is_header_fself(ctx[7], (uint32_t)ctx[1], 0, 0, 0, 0))
@@ -200,13 +200,18 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     else if(lr == (uint64_t)sceSblServiceMailbox_lr_decryptMultipleSelfBlocks)
     {
         uint64_t ctx[8];
-        if ((uint64_t) fwver < 0x500)
+		
+        if (fwver >= 0x600 && fwver <= 0x761) 
         {
-            copy_from_kernel(ctx, regs[R13], sizeof(ctx));
-        }
-        else
+        copy_from_kernel(ctx, kpeek64(regs[RBP] - 208), sizeof(ctx));
+        } 
+        else if (fwver >= 0x500 && fwver <= 0x550) 
         {
-            copy_from_kernel(ctx, kpeek64(regs[RBP] - 216), sizeof(ctx));
+        copy_from_kernel(ctx, kpeek64(regs[RBP] - 216), sizeof(ctx));
+        } 
+        else 
+        {
+        copy_from_kernel(ctx, regs[R13], sizeof(ctx));
         }
         
         if(is_header_fself(ctx[7], (uint32_t)ctx[1], 0, 0, 0, 0))
