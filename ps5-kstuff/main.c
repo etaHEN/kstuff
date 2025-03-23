@@ -723,6 +723,62 @@ static struct shellcore_patch shellcore_patches_550[] = {
     {0x5A2DA0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
+static struct shellcore_patch shellcore_patches_600[] = {
+    {0xa7d30e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xa7d319, "\xe8\x82\xfa\xff\xff\x58\xc3", 7},
+    {0xa7cd91, "\x31\xc0\x50\xeb\xe3", 5},
+    {0xa7cd79, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
+    {0x5d2bb4, "\xeb\x04", 2},
+    {0x2c0982, "\xeb\x04", 2},
+    {0x2c0dc2, "\xeb\x04", 2},
+    {0x5f01bf, "\xeb", 1},
+    {0x5d9c0d, "\x90\xe9", 2},
+    {0x5f0ef0, "\xeb", 1},
+    {0x5f248a, "\x3b\x01\x00\x00", 4},
+    {0x1d8c71, "\xe8\x7a\xb4\x4e\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
+    {0x1d8ea3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xc5\xfb\xff\xff", 11},
+    {0x1d897e, "\xe9\xee\x02\x00\x00", 5},
+    {0x2b93cb, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x2b9448, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x2b954b, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x2b961f, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x2b9a80, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x2b9c50, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2ba025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x2ba0c2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x5d42f7, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5d440c, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5d7270, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+};
+
+static struct shellcore_patch shellcore_patches_602[] = {
+    {0xa7d2ae, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xa7d2b9, "\xe8\x82\xfa\xff\xff\x58\xc3", 7},
+    {0xa7cd31, "\x31\xc0\x50\xeb\xe3", 5},
+    {0xa7cd19, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
+    {0x5d2bb4, "\xeb\x04", 2},
+    {0x2c0982, "\xeb\x04", 2},
+    {0x2c0dc2, "\xeb\x04", 2},
+    {0x5f01bf, "\xeb", 1},
+    {0x5d9c0d, "\x90\xe9", 2},
+    {0x5f0ef0, "\xeb", 1},
+    {0x5f248a, "\x3b\x01\x00\x00", 4},
+    {0x1d8c71, "\xe8\x1a\xb4\x4e\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
+    {0x1d8ea3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xc5\xfb\xff\xff", 11},
+    {0x1d897e, "\xe9\xee\x02\x00\x00", 5},
+    {0x2b93cb, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x2b9448, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x2b954b, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x2b961f, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x2b9a80, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x2b9c50, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2ba025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x2ba0c2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x5d42f7, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5d440c, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5d7270, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+};
+
 static struct shellcore_patch shellcore_patches_650[] = {
     {0xa7dade, "\x52\xeb\x08\x66\x90", 3}, // NOTE: Shouldn't need the \x66\x90.... on any FW
     {0xa7dae9, "\xe8\x82\xfa\xff\xff\x58\xc3", 7},
@@ -829,6 +885,8 @@ static const struct shellcore_patch* get_shellcore_patches(size_t* n_patches)
     FW(502);
     FW(510);
     FW(550);
+    FW(600);
+    FW(602);
     FW(650);
     default:
         *n_patches = 1;
@@ -1184,6 +1242,58 @@ static struct PARASITES(14) parasites_550 = {
     }
 };
 
+static struct PARASITES(14) parasites_600 = {
+    .lim_syscall = 3,
+    .lim_fself = 12,
+    .lim_total = 14,
+    .parasites = {
+        /* syscall parasites */
+        //{-0x844fcc, RDI}, //data 0x41B034
+        {-0x844fcc, R13}, //data 0x41B034
+        {-0x39bb9c, RSI}, //data 0x8C4464
+        {-0x39bb5c, RSI}, //data 0x8C44A4
+        /* fself parasites */
+        {-0x2da786, RAX}, //data 0x98587A
+        {-0x2db2da, RAX}, //data 0x984D26
+        {-0x2db1a0, RAX}, //data 0x984E60
+        {-0x2daf03, RAX}, //data 0x9850FD
+        {-0x2dac1d, RAX}, //data 0x9853E3
+        {-0x2da8fe, RDX}, //data 0x985702
+        {-0x2da8f2, RCX}, //data 0x98570E
+        {-0x9dcad0, RDI}, //data 0x283530
+        {-0x2dad56, R10}, //data 0x9852AA
+        /* unsorted parasites */
+        {-0x48feae, RAX}, //data 0x7D0152
+        {-0x48feae, R15}, //data 0x7D0152
+    }
+};
+
+static struct PARASITES(14) parasites_602 = {
+    .lim_syscall = 3,
+    .lim_fself = 12,
+    .lim_total = 14,
+    .parasites = {
+        /* syscall parasites */
+        //{-0x844fcc, RDI}, //data 0x41B034
+        {-0x844fcc, R13}, //data 0x41B034
+        {-0x39bbbc, RSI}, //data 0x8C4444
+        {-0x39bb7c, RSI}, //data 0x8C4484
+        /* fself parasites */
+        {-0x2da7a6, RAX}, //data 0x98585A
+        {-0x2db2fa, RAX}, //data 0x984D06
+        {-0x2db1c0, RAX}, //data 0x984E40
+        {-0x2daf23, RAX}, //data 0x9850DD
+        {-0x2dac3d, RAX}, //data 0x9853C3
+        {-0x2da91e, RDX}, //data 0x9856E2
+        {-0x2da912, RCX}, //data 0x9856EE
+        {-0x9dcad0, RDI}, //data 0x283530
+        {-0x2dad76, R10}, //data 0x98528A
+        /* unsorted parasites */
+        {-0x48fece, RAX}, //data 0x7D0132
+        {-0x48fece, R15}, //data 0x7D0132
+    }
+};
+
 static struct PARASITES(14) parasites_650 = {
     .lim_syscall = 3,
     .lim_fself = 12,
@@ -1255,6 +1365,12 @@ static struct parasite_desc* get_parasites(size_t* desc_size)
     case 0x550:
         *desc_size = sizeof(parasites_550);
         return (void*)&parasites_550;
+    case 0x600:
+        *desc_size = sizeof(parasites_600);
+        return (void*)&parasites_600;
+    case 0x602:
+        *desc_size = sizeof(parasites_602);
+        return (void*)&parasites_602;
     case 0x650:
         *desc_size = sizeof(parasites_650);
         return (void*)&parasites_650;
