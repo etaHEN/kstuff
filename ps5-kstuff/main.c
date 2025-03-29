@@ -397,7 +397,7 @@ static struct shellcore_patch shellcore_patches_300[] = {
     {0x253582, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x4DEF37, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x4DF04C, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x4E0F87, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x4E0F10, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_310[] = {
@@ -442,7 +442,7 @@ static struct shellcore_patch shellcore_patches_320[] = {
     {0x253672, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x4DF207, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x4DF31C, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x4E1257, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x4E11E0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_321[] = {
@@ -470,7 +470,7 @@ static struct shellcore_patch shellcore_patches_321[] = {
     {0x253672, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x4DF207, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x4DF31C, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x4E1257, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x4E11E0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_400[] = {
@@ -498,7 +498,7 @@ static struct shellcore_patch shellcore_patches_400[] = {
     {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x5329AC, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x534937, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x5348C0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_402[] = {
@@ -526,7 +526,7 @@ static struct shellcore_patch shellcore_patches_402[] = {
     {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x5329AC, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x534937, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x5348C0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_403[] = {
@@ -554,7 +554,7 @@ static struct shellcore_patch shellcore_patches_403[] = {
     {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x5329AC, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x534937, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x5348C0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_450[] = {
@@ -581,7 +581,7 @@ static struct shellcore_patch shellcore_patches_450[] = {
     {0x269212, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x533147, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x53325C, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x5351E7, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x535170, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_451[] = {
@@ -608,7 +608,7 @@ static struct shellcore_patch shellcore_patches_451[] = {
     {0x269212, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x533137, "\xEB", 1}, //PS4 PKG Installer Patch 4
     {0x53324C, "\xEB", 1}, //PS5 PKG Installer Patch 4
-    {0x5351D7, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+    {0x535160, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_500[] = {
