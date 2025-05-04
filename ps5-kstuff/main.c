@@ -373,7 +373,8 @@ struct shellcore_patch
 };
 
 static struct shellcore_patch shellcore_patches_300[] = {
-    {0x9d1cae, "\x52\xeb\x08\x66\x90", 5},
+    //{0x9d1cae, "\x52\xeb\x08\x66\x90", 5},
+    {0x9d1cae, "\x52\xeb\x08", 3},
     {0x9d1cb9, "\xe8\x02\xfc\xff\xff\x58\xc3", 7},
     {0x9d18b1, "\x31\xc0\x50\xeb\xe3", 5},
     {0x9d1899, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -387,12 +388,14 @@ static struct shellcore_patch shellcore_patches_300[] = {
     {0x1968c1, "\xe8\x4a\xde\x42\x00\x31\xc9\xff\xc1\xe9\x12\x01\x00\x00", 14},
     {0x1969e1, "\x83\xf8\x02\x0f\x43\xc1\xe9\xff\xfb\xff\xff", 11},
     {0x1965c9, "\xe9\xf3\x02\x00\x00", 5},
+    {0x131FA10, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x899166, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x25284B, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2528C8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2529CB, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x252A9F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x252F35, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x253120, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x253120, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2534E5, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x253582, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x4DEF37, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -401,7 +404,8 @@ static struct shellcore_patch shellcore_patches_300[] = {
 };
 
 static struct shellcore_patch shellcore_patches_310[] = {
-    {0x9d1cee, "\x52\xeb\x08\x66\x90", 5},
+    //{0x9d1cee, "\x52\xeb\x08\x66\x90", 5},
+    {0x9d1cee, "\x52\xeb\x08", 3},
     {0x9d1cf9, "\xe8\x02\xfc\xff\xff\x58\xc3", 7},
     {0x9d18f1, "\x31\xc0\x50\xeb\xe3", 5},
     {0x9d18d9, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -415,10 +419,24 @@ static struct shellcore_patch shellcore_patches_310[] = {
     {0x1968c1, "\xe8\x8a\xde\x42\x00\x31\xc9\xff\xc1\xe9\x12\x01\x00\x00", 14},
     {0x1969e1, "\x83\xf8\x02\x0f\x43\xc1\xe9\xff\xfb\xff\xff", 11},
     {0x1965c9, "\xe9\xf3\x02\x00\x00", 5},
+    {0x131FA50, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x8991A6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
+    {0x25288B, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x252908, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x252A0B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x252ADF, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x252F75, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x253160, "\xeb", 1}, //PS5 PKG Installer Patch 2
+    {0x253525, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x2535C2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x4DEF77, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x4DF08C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x4E0F50, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
 static struct shellcore_patch shellcore_patches_320[] = {
-    {0x9d1f9e, "\x52\xeb\x08\x66\x90", 5},
+    //{0x9d1f9e, "\x52\xeb\x08\x66\x90", 5},
+    {0x9d1f9e, "\x52\xeb\x08", 3},
     {0x9d1fa9, "\xe8\x02\xfc\xff\xff\x58\xc3", 7},
     {0x9d1ba1, "\x31\xc0\x50\xeb\xe3", 5},
     {0x9d1b89, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -432,12 +450,14 @@ static struct shellcore_patch shellcore_patches_320[] = {
     {0x1968c1, "\xe8\x3a\xe1\x42\x00\x31\xc9\xff\xc1\xe9\x12\x01\x00\x00", 14},
     {0x1969e1, "\x83\xf8\x02\x0f\x43\xc1\xe9\xff\xfb\xff\xff", 11},
     {0x1965c9, "\xe9\xf3\x02\x00\x00", 5},
+    {0x131FEA0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x899456, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x25293B, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2529B8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x252ABB, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x252B8F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x253025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x253210, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x253210, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2535D5, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x253672, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x4DF207, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -446,7 +466,8 @@ static struct shellcore_patch shellcore_patches_320[] = {
 };
 
 static struct shellcore_patch shellcore_patches_321[] = {
-    {0x9d1f9e, "\x52\xeb\x08\x66\x90", 5},
+    //{0x9d1f9e, "\x52\xeb\x08\x66\x90", 5},
+    {0x9d1f9e, "\x52\xeb\x08", 3},
     {0x9d1fa9, "\xe8\x02\xfc\xff\xff\x58\xc3", 7},
     {0x9d1ba1, "\x31\xc0\x50\xeb\xe3", 5},
     {0x9d1b89, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -460,12 +481,14 @@ static struct shellcore_patch shellcore_patches_321[] = {
     {0x1968c1, "\xe8\x3a\xe1\x42\x00\x31\xc9\xff\xc1\xe9\x12\x01\x00\x00", 14},
     {0x1969e1, "\x83\xf8\x02\x0f\x43\xc1\xe9\xff\xfb\xff\xff", 11},
     {0x1965c9, "\xe9\xf3\x02\x00\x00", 5},
+    {0x131FEA0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x899456, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x25293B, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2529B8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x252ABB, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x252B8F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x253025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x253210, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x253210, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2535D5, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x253672, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x4DF207, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -474,7 +497,8 @@ static struct shellcore_patch shellcore_patches_321[] = {
 };
 
 static struct shellcore_patch shellcore_patches_400[] = {
-    {0x974fee, "\x52\xeb\x08\x66\x90", 5},
+    //{0x974fee, "\x52\xeb\x08\x66\x90", 5},
+    {0x974fee, "\x52\xeb\x08", 3},
     {0x974ff9, "\xe8\xd2\xfb\xff\xff\x58\xc3", 7},
     {0x974bc1, "\x31\xc0\x50\xeb\xe3", 5},
     {0x974ba9, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -488,12 +512,14 @@ static struct shellcore_patch shellcore_patches_400[] = {
     {0x1a12d1, "\xe8\xea\x88\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14},
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11},
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5},
+    {0x12B5EA0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x81CA56, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x267DBB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x267E52, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x267F6B, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x26803F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2684A8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x268679, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x268679, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x268A45, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -502,7 +528,8 @@ static struct shellcore_patch shellcore_patches_400[] = {
 };
 
 static struct shellcore_patch shellcore_patches_402[] = {
-    {0x974fee, "\x52\xeb\x08\x66\x90", 5},
+    //{0x974fee, "\x52\xeb\x08\x66\x90", 5},
+    {0x974fee, "\x52\xeb\x08", 3},
     {0x974ff9, "\xe8\xd2\xfb\xff\xff\x58\xc3", 7},
     {0x974bc1, "\x31\xc0\x50\xeb\xe3", 5},
     {0x974ba9, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -516,12 +543,14 @@ static struct shellcore_patch shellcore_patches_402[] = {
     {0x1a12d1, "\xe8\xea\x88\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14},
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11},
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5},
+    {0x12B5EB0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x81CA56, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x267DBB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x267E52, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x267F6B, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x26803F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2684A8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x268679, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x268679, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x268A45, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -530,7 +559,8 @@ static struct shellcore_patch shellcore_patches_402[] = {
 };
 
 static struct shellcore_patch shellcore_patches_403[] = {
-    {0x974fee, "\x52\xeb\x08\x66\x90", 5}, //push rdx; jmp 0x974ff9; 2-byte nop
+    //{0x974fee, "\x52\xeb\x08\x66\x90", 5}, //push rdx; jmp 0x974ff9; 2-byte nop
+    {0x974fee, "\x52\xeb\x08", 3},
     {0x974ff9, "\xe8\xd2\xfb\xff\xff\x58\xc3", 7}, //call 0x974bd0; pop rax; ret
     {0x974bc1, "\x31\xc0\x50\xeb\xe3", 5}, //xor eax, eax; push rax; jmp 0x974ba9
     {0x974ba9, "\xe8\x22\x00\x00\x00\x58\xc3", 7}, //call 0x974bd0; pop rax; ret
@@ -544,12 +574,14 @@ static struct shellcore_patch shellcore_patches_403[] = {
     {0x1a12d1, "\xe8\xea\x88\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14}, //call 0x619bc0; xor ecx, ecx; inc ecx; jmp 0x1a15d3
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11}, //cmp eax, 2; cmovae eax, ecx; jmp 0x1a1007
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5}, //jmp 0x1a12d1
+    {0x12B5EB0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x81CA56, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x267DBB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x267E52, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x267F6B, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x26803F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2684A8, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x268679, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x268679, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x268A45, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x268AE2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x532897, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -558,7 +590,8 @@ static struct shellcore_patch shellcore_patches_403[] = {
 };
 
 static struct shellcore_patch shellcore_patches_450[] = {
-    {0x97595e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0x97595e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0x97595e, "\x52\xeb\x08", 3},
     {0x975969, "\xe8\xd2\xfb\xff\xff\x58\xc3", 7},
     {0x975531, "\x31\xc0\x50\xeb\xe3", 5},
     {0x975519, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -572,12 +605,14 @@ static struct shellcore_patch shellcore_patches_450[] = {
     {0x1a12d1, "\xe8\x5a\x92\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14},
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11},
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5},
+    {0x12C1E70, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x81D3C6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2684eb, "\x90\xe9", 2}, //PS4 Disc Installer Patch 1
     {0x268582, "\x90\xe9", 2}, //PS5 Disc Installer Patch 1
     {0x26869b, "\xeb", 1}, //PS4 PKG Installer Patch 1
     {0x26876f, "\xeb", 1}, //PS5 PKG Installer Patch 1
     {0x268bd8, "\x90\xe9", 2}, //PS4 PKG Installer Patch 2
-    {0x268da9, "\x90\xe9", 2}, //PS5 PKG Installer Patch 2
+    {0x268da9, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x269175, "\x90\xe9", 2}, //PS4 PKG Installer Patch 3
     {0x269212, "\x90\xe9", 2}, //PS5 PKG Installer Patch 3
     {0x533137, "\xeb", 1}, //PS4 PKG Installer Patch 4
@@ -586,7 +621,8 @@ static struct shellcore_patch shellcore_patches_450[] = {
 };
 
 static struct shellcore_patch shellcore_patches_451[] = {
-    {0x97596e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0x97596e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0x97596e, "\x52\xeb\x08", 3},
     {0x975979, "\xe8\xd2\xfb\xff\xff\x58\xc3", 7},
     {0x975541, "\x31\xc0\x50\xeb\xe3", 5},
     {0x975529, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -600,12 +636,14 @@ static struct shellcore_patch shellcore_patches_451[] = {
     {0x1a12d1, "\xe8\x6a\x92\x47\x00\x31\xc9\xff\xc1\xe9\xf4\x02\x00\x00", 14},
     {0x1a15d3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x29\xfa\xff\xff", 11},
     {0x1a0fe5, "\xe9\xe7\x02\x00\x00", 5},
+    {0x12C1E70, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x81D3D6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2684eb, "\x90\xe9", 2}, //PS4 Disc Installer Patch 1
     {0x268582, "\x90\xe9", 2}, //PS5 Disc Installer Patch 1
     {0x26869b, "\xeb", 1}, //PS4 PKG Installer Patch 1
     {0x26876f, "\xeb", 1}, //PS5 PKG Installer Patch 1
     {0x268bd8, "\x90\xe9", 2}, //PS4 PKG Installer Patch 2
-    {0x268da9, "\x90\xe9", 2}, //PS5 PKG Installer Patch 2
+    {0x268da9, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x269175, "\x90\xe9", 2}, //PS4 PKG Installer Patch 3
     {0x269212, "\x90\xe9", 2}, //PS5 PKG Installer Patch 3
     {0x533147, "\xeb", 1}, //PS4 PKG Installer Patch 4
@@ -614,7 +652,8 @@ static struct shellcore_patch shellcore_patches_451[] = {
 };
 
 static struct shellcore_patch shellcore_patches_500[] = {
-    {0xa2e62e, "\x52\xeb\x08\x66\x90", 5},
+    //{0xa2e62e, "\x52\xeb\x08\x66\x90", 5},
+    {0xa2e62e, "\x52\xeb\x08", 3},
     {0xa2e639, "\xe8\x22\xfb\xff\xff\x58\xc3", 7},
     {0xa2e151, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa2e139, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -628,12 +667,14 @@ static struct shellcore_patch shellcore_patches_500[] = {
     {0x1c33c1, "\xe8\xea\x7d\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c35f3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c30ee, "\xe9\xce\x02\x00\x00", 5},
+    {0x1382490, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x8CEAC6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x298CDB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x298D58, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x298E5B, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x299396, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x299567, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x299567, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x299935, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2999D2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x59D747, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -642,7 +683,8 @@ static struct shellcore_patch shellcore_patches_500[] = {
 };
 
 static struct shellcore_patch shellcore_patches_502[] = {
-    {0xa2e61e, "\x52\xeb\x08\x66\x90", 5},
+    //{0xa2e61e, "\x52\xeb\x08\x66\x90", 5},
+    {0xa2e61e, "\x52\xeb\x08", 3},
     {0xa2e629, "\xe8\x22\xfb\xff\xff\x58\xc3", 7},
     {0xa2e141, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa2e129, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -656,12 +698,14 @@ static struct shellcore_patch shellcore_patches_502[] = {
     {0x1c33c1, "\xe8\xda\x7d\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c35f3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c30ee, "\xe9\xce\x02\x00\x00", 5},
+    {0x1382470, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x8CEAB6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x298CDB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x298D58, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x298E5B, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x299396, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x299567, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x299567, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x299935, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2999D2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x59D737, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -670,7 +714,8 @@ static struct shellcore_patch shellcore_patches_502[] = {
 };
 
 static struct shellcore_patch shellcore_patches_510[] = {
-    {0xa30fde, "\x52\xeb\x08\x66\x90", 5},
+    //{0xa30fde, "\x52\xeb\x08\x66\x90", 5},
+    {0xa30fde, "\x52\xeb\x08", 3},
     {0xa30fe9, "\xe8\x22\xfb\xff\xff\x58\xc3", 7},
     {0xa30b01, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa30ae9, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -684,12 +729,14 @@ static struct shellcore_patch shellcore_patches_510[] = {
     {0x1c3511, "\xe8\xea\xac\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c3743, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c323e, "\xe9\xce\x02\x00\x00", 5},
+    {0x13855a0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x8D1486, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x299BAB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x299C28, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x299D2B, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x29A266, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x29A437, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x29A437, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x29A805, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x29A8A2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x5A0207, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -698,7 +745,8 @@ static struct shellcore_patch shellcore_patches_510[] = {
 };
 
 static struct shellcore_patch shellcore_patches_550[] = {
-    {0xa319ee, "\x52\xeb\x08\x66\x90", 5},
+    //{0xa319ee, "\x52\xeb\x08\x66\x90", 5},
+    {0xa319ee, "\x52\xeb\x08", 3},
     {0xa319f9, "\xe8\x22\xfb\xff\xff\x58\xc3", 7},
     {0xa31511, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa314f9, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -712,12 +760,14 @@ static struct shellcore_patch shellcore_patches_550[] = {
     {0x1c3511, "\xe8\xba\xb4\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1c3743, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
     {0x1c323e, "\xe9\xce\x02\x00\x00", 5},
+    {0x1389c00, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x8D1E96, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x299BAB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x299C28, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x299D2B, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x299DFF, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x29A266, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x29A437, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x29A437, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x29A805, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x29A8A2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x5A0207, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -726,7 +776,8 @@ static struct shellcore_patch shellcore_patches_550[] = {
 };
 
 static struct shellcore_patch shellcore_patches_600[] = {
-    {0xa7d30e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xa7d30e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xa7d30e, "\x52\xeb\x08", 3},
     {0xa7d319, "\xe8\x82\xfa\xff\xff\x58\xc3", 7},
     {0xa7cd91, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa7cd79, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -740,12 +791,14 @@ static struct shellcore_patch shellcore_patches_600[] = {
     {0x1d8c71, "\xe8\x7a\xb4\x4e\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1d8ea3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xc5\xfb\xff\xff", 11},
     {0x1d897e, "\xe9\xee\x02\x00\x00", 5},
+    {0x14128f0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x91B466, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2b93cb, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2b9448, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2b954b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2b961f, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2b9a80, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2b9c50, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2b9c50, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2ba025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2ba0c2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x5d42f7, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -754,7 +807,8 @@ static struct shellcore_patch shellcore_patches_600[] = {
 };
 
 static struct shellcore_patch shellcore_patches_602[] = {
-    {0xa7d2ae, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xa7d2ae, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xa7d2ae, "\x52\xeb\x08", 3},
     {0xa7d2b9, "\xe8\x82\xfa\xff\xff\x58\xc3", 7},
     {0xa7cd31, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa7cd19, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -768,12 +822,14 @@ static struct shellcore_patch shellcore_patches_602[] = {
     {0x1d8c71, "\xe8\x1a\xb4\x4e\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1d8ea3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xc5\xfb\xff\xff", 11},
     {0x1d897e, "\xe9\xee\x02\x00\x00", 5},
+    {0x1412cf0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x91B406, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2b93cb, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2b9448, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2b954b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2b961f, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2b9a80, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2b9c50, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2b9c50, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2ba025, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2ba0c2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x5d42f7, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -782,7 +838,8 @@ static struct shellcore_patch shellcore_patches_602[] = {
 };
 
 static struct shellcore_patch shellcore_patches_650[] = {
-    {0xa7dade, "\x52\xeb\x08\x66\x90", 3}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xa7dade, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xa7dade, "\x52\xeb\x08", 3},
     {0xa7dae9, "\xe8\x82\xfa\xff\xff\x58\xc3", 7},
     {0xa7d561, "\x31\xc0\x50\xeb\xe3", 5},
     {0xa7d549, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -796,12 +853,14 @@ static struct shellcore_patch shellcore_patches_650[] = {
     {0x1d8c71, "\xe8\xea\xaf\x4e\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1d8ea3, "\x83\xf8\x02\x0f\x43\xc1\xe9\xc5\xfb\xff\xff", 11},
     {0x1d897e, "\xe9\xee\x02\x00\x00", 5},
+    {0x1413110, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x91BC36, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2b943b, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2b94b8, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2b95bb, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2b968f, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2b9af0, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2b9cc0, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2b9cc0, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2ba095, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2ba132, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x5d4367, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -810,7 +869,8 @@ static struct shellcore_patch shellcore_patches_650[] = {
 };
 
 static struct shellcore_patch shellcore_patches_700[] = {
-    {0xb424de, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xb424de, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xb424de, "\x52\xeb\x08", 3},
     {0xb424e9, "\xe8\xd2\xf9\xff\xff\x58\xc3", 7},
     {0xb41eb1, "\x31\xc0\x50\xeb\xe3", 5},
     {0xb41e99, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -824,12 +884,14 @@ static struct shellcore_patch shellcore_patches_700[] = {
     {0x1e1bb1, "\xe8\xca\xc5\x59\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1e1de3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x55\xfb\xff\xff", 11},
     {0x1e184e, "\xe9\x5e\x03\x00\x00", 5},
+    {0x15771F0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x9CAD26, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2d59cb, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2d5a49, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2d5b4b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2d5c20, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2d608a, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2d625d, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2d625d, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2d6635, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2d66d3, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x68601d, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -838,7 +900,8 @@ static struct shellcore_patch shellcore_patches_700[] = {
 };
 
 static struct shellcore_patch shellcore_patches_701[] = {
-    {0xb424de, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xb424de, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xb424de, "\x52\xeb\x08", 3},
     {0xb424e9, "\xe8\xd2\xf9\xff\xff\x58\xc3", 7},
     {0xb41eb1, "\x31\xc0\x50\xeb\xe3", 5},
     {0xb41e99, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -852,12 +915,14 @@ static struct shellcore_patch shellcore_patches_701[] = {
     {0x1e1bb1, "\xe8\xca\xc5\x59\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1e1de3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x55\xfb\xff\xff", 11},
     {0x1e184e, "\xe9\x5e\x03\x00\x00", 5},
+    {0x15771F0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x9CAD26, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2d59cb, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2d5a49, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2d5b4b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2d5c20, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2d608a, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2d625d, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2d625d, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2d6635, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2d66d3, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x68601d, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -866,7 +931,8 @@ static struct shellcore_patch shellcore_patches_701[] = {
 };
 
 static struct shellcore_patch shellcore_patches_720[] = {
-    {0xb42dbe, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xb42dbe, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xb42dbe, "\x52\xeb\x08", 3},
     {0xb42dc9, "\xe8\xd2\xf9\xff\xff\x58\xc3", 7},
     {0xb42791, "\x31\xc0\x50\xeb\xe3", 5},
     {0xb42779, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -880,12 +946,14 @@ static struct shellcore_patch shellcore_patches_720[] = {
     {0x1e1bb1, "\xe8\x9a\xce\x59\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1e1de3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x55\xfb\xff\xff", 11},
     {0x1e184e, "\xe9\x5e\x03\x00\x00", 5},
+    {0x1577AD0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x9CB606, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2d59cb, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2d5a49, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2d5b4b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2d5c20, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2d608a, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2d625d, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2d625d, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2d6635, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2d66d3, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x68603d, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -894,7 +962,8 @@ static struct shellcore_patch shellcore_patches_720[] = {
 };
 
 static struct shellcore_patch shellcore_patches_740[] = {
-    {0xb4e4ae, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xb4e4ae, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xb4e4ae, "\x52\xeb\x08", 3},
     {0xb4e4b9, "\xe8\xD2\xf9\xff\xff\x58\xc3", 7},
     {0xb4de81, "\x31\xc0\x50\xeb\xe3", 5},
     {0xb4de69, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -908,12 +977,14 @@ static struct shellcore_patch shellcore_patches_740[] = {
     {0x1e5f81, "\xe8\xba\xd5\x59\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1e61b3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x55\xfb\xff\xff", 11},
     {0x1e5c1e, "\xe9\x5e\x03\x00\x00", 5},
+    {0x1584BE0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x9D6CF6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2d9d9b, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2d9e19, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2d9f1b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2d9ff0, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2da45a, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2da62d, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2da62d, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2daa05, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2daaa3, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x68ab2d, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -922,7 +993,8 @@ static struct shellcore_patch shellcore_patches_740[] = {
 };
 
 static struct shellcore_patch shellcore_patches_760[] = {
-    {0xb51a8e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xb51a8e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xb51a8e, "\x52\xeb\x08", 3},
     {0xb51a99, "\xe8\xd2\xf9\xff\xff\x58\xc3", 7},
     {0xb51461, "\x31\xc0\x50\xeb\xe3", 5},
     {0xb51449, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -936,12 +1008,14 @@ static struct shellcore_patch shellcore_patches_760[] = {
     {0x1e5f81, "\xe8\xba\xd5\x59\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1e61b3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x55\xfb\xff\xff", 11},
     {0x1e5c1e, "\xe9\x5e\x03\x00\x00", 5},
+    {0x15881C0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x9DA2D6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2d9d9b, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2d9e19, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2d9f1b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2d9ff0, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2da45a, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2da62d, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2da62d, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2daa05, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2daaa3, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x68ab2d, "\xEB", 1}, //PS4 PKG Installer Patch 4
@@ -950,7 +1024,8 @@ static struct shellcore_patch shellcore_patches_760[] = {
 };
 
 static struct shellcore_patch shellcore_patches_761[] = {
-    {0xb51a8e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    //{0xb51a8e, "\x52\xeb\x08\x66\x90", 5}, // NOTE: Shouldn't need the \x66\x90.... on any FW
+    {0xb51a8e, "\x52\xeb\x08", 3},
     {0xb51a99, "\xe8\xd2\xf9\xff\xff\x58\xc3", 7},
     {0xb51461, "\x31\xc0\x50\xeb\xe3", 5},
     {0xb51449, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
@@ -964,12 +1039,14 @@ static struct shellcore_patch shellcore_patches_761[] = {
     {0x1e5f81, "\xe8\xba\xd5\x59\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
     {0x1e61b3, "\x83\xf8\x02\x0f\x43\xc1\xe9\x55\xfb\xff\xff", 11},
     {0x1e5c1e, "\xe9\x5e\x03\x00\x00", 5},
+    {0x15881C0, "\x31\xC0\xC3", 3}, //VR2 Min Fw Check
+    {0x9DA2D6, "\x90\x90\x90\x90\x90", 5}, //disable game error message
     {0x2d9d9b, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
     {0x2d9e19, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
     {0x2d9f1b, "\xEB", 1}, //PS4 PKG Installer Patch 1
     {0x2d9ff0, "\xEB", 1}, //PS5 PKG Installer Patch 1
     {0x2da45a, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
-    {0x2da62d, "\x90\xE9", 2}, //PS5 PKG Installer Patch 2
+    {0x2da62d, "\xeb", 1}, //PS5 PKG Installer Patch 2
     {0x2daa05, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
     {0x2daaa3, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
     {0x68ab2d, "\xEB", 1}, //PS4 PKG Installer Patch 4
