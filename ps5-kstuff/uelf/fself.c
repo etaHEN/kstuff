@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "traps.h"
 #include "log.h"
+#include "syscall_fixes.h"
 
 #ifndef FREEBSD
 
@@ -105,8 +106,8 @@ static uint64_t dbgregs_for_fself[6] = {
     (uint64_t)mmap_self_fix_1_start, (uint64_t)mmap_self_fix_2_start,
     0, 0x455,
 #else
-    0, 0,
-    0, 0x405,
+    (uint64_t) aslr_fix_start, 0,
+    0, 0x415,
 #endif
 };
 

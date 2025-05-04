@@ -35,6 +35,10 @@ DEF(mmap_self_fix_1_start, -0x2c92bd)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1dd21e)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x0) //data 0x38F610
+DEF(aslr_fix_end, -0x0) //data 0x0x38F669/0x38F66F
+
 DEF(sigaction_fix_start, -0x6b549f)
 DEF(sigaction_fix_end, -0x6b5449)
 DEF(sysents, 0x16f720)
@@ -109,6 +113,10 @@ DEF(mmap_self_fix_1_start, -0x2c927d)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1dd1de)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x8409B0) //data 0x38F650
+DEF(aslr_fix_end, -0x840970) //data 0x38F690
+
 DEF(sigaction_fix_start, -0x6b545f)
 DEF(sigaction_fix_end, -0x6b5409)
 DEF(sysents, 0x16f720)
@@ -183,6 +191,10 @@ DEF(mmap_self_fix_1_start, -0x2c8f2d)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1dcd1e)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x840660) //data 0x38F9A0
+DEF(aslr_fix_end, -0x840620) //data 0x38F9E0
+
 DEF(sigaction_fix_start, -0x6b510f)
 DEF(sigaction_fix_end, -0x6b50b9)
 DEF(sysents, 0x16f720)
@@ -257,6 +269,10 @@ DEF(mmap_self_fix_1_start, -0x2c8f2d)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1dcd1e)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x840660) //data 0x38F9A0
+DEF(aslr_fix_end, -0x840620) //data 0x38F9E0
+
 DEF(sigaction_fix_start, -0x6b510f)
 DEF(sigaction_fix_end, -0x6b50b9)
 DEF(sysents, 0x16f720)
@@ -331,6 +347,10 @@ DEF(mmap_self_fix_1_start, -0x2cd3fd)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1df3ae)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x85a312) //data 0x3A5CEE
+DEF(aslr_fix_end, -0x85a2d2) //data 0x3A5D2E
+
 DEF(sigaction_fix_start, -0x6c2989)
 DEF(sigaction_fix_end, -0x6c2933)
 DEF(sysents, 0x1709c0)
@@ -405,6 +425,10 @@ DEF(mmap_self_fix_1_start, -0x2cd3ad)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1df35e)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x85a312) //data 0x3A5CEE
+DEF(aslr_fix_end, -0x85a2d2) //data 0x3A5D2E
+
 DEF(sigaction_fix_start, -0x6c2989)
 DEF(sigaction_fix_end, -0x6c2933)
 DEF(sysents, 0x1709c0)
@@ -479,6 +503,10 @@ DEF(mmap_self_fix_1_start, -0x2cd31d)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1df2ce)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x85a312) //data 0x3A5CEE
+DEF(aslr_fix_end, -0x85a2d2) //data 0x3A5D2E
+
 DEF(sigaction_fix_start, -0x6c2989) //data 0x53D677
 DEF(sigaction_fix_end, -0x6c2933) //data 0x53D6CD
 DEF(sysents, 0x1709c0) //data 0xD709C0
@@ -557,6 +585,10 @@ DEF(mmap_self_fix_1_start, -0x2cd16d)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1df11e)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x85A342) //data 0x3A5CBE
+DEF(aslr_fix_end, -0x85A302) //data 0x3A5CFE
+
 DEF(sigaction_fix_start, -0x6c2959)
 DEF(sigaction_fix_end, -0x6c2903)
 DEF(sysents, 0x1709c0)
@@ -637,6 +669,10 @@ DEF(mmap_self_fix_1_start, -0x2ccdcd)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x1ded7e)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x85A342) //data 0x3A5CBE
+DEF(aslr_fix_end, -0x85A302) //data 0x3A5CFE
+
 DEF(sigaction_fix_start, -0x6c2959)
 DEF(sigaction_fix_end, -0x6c2903)
 DEF(sysents, 0x1709c0)
@@ -714,6 +750,9 @@ DEF(mmap_self_fix_1_start, 0x0)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x88c5aa) //data 0x3B3A56
+DEF(aslr_fix_end, aslr_fix_start+2)
 
 DEF(sigaction_fix_start, -0x6e7db0) //data 0x558250
 DEF(sigaction_fix_end, -0x6e7d6e) //data 0x558292
@@ -793,6 +832,9 @@ DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
 
+DEF(aslr_fix_start, -0x88c5aa) //data 0x3B3A56
+DEF(aslr_fix_end, aslr_fix_start+2)
+
 DEF(sigaction_fix_start, -0x6e7db0) //data 0x558250
 DEF(sigaction_fix_end, -0x6e7d6e) //data 0x558292
 DEF(sysents, 0x1b1ef0) //data 0xDF1EF0
@@ -871,6 +913,9 @@ DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
 
+DEF(aslr_fix_start, -0x88c5aa) //data 0x3B3A56
+DEF(aslr_fix_end, aslr_fix_start+2)
+
 DEF(sigaction_fix_start, -0x6e7be0)
 DEF(sigaction_fix_end, -0x6e7b9e)
 DEF(sysents, 0x1b2040)
@@ -947,6 +992,9 @@ DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
 
+DEF(aslr_fix_start, -0x88C4FA) //data 0x3B3B06
+DEF(aslr_fix_end, aslr_fix_start+2)
+
 DEF(sigaction_fix_start, -0x6e7b30)
 DEF(sigaction_fix_end, -0x6e7aee)
 DEF(sysents, 0x1b2210)
@@ -1022,6 +1070,9 @@ DEF(mmap_self_fix_1_start, 0x0)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x89F3ED) //data 0x3C0C13
+DEF(aslr_fix_end, aslr_fix_start+2)
 
 DEF(sigaction_fix_start, -0x6f6b92) //data 0x56946E
 DEF(sigaction_fix_end, -0x6f6b68) //data 0x569498
@@ -1101,6 +1152,9 @@ DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
 
+DEF(aslr_fix_start, -0x89F3ED) //data 0x3C0C13
+DEF(aslr_fix_end, aslr_fix_start+2)
+
 DEF(sigaction_fix_start, -0x6f6b92) //data 0x56946E
 DEF(sigaction_fix_end, -0x6f6b68) //data 0x569498
 DEF(sysents, 0x1b49f0) //data 0xE149F0
@@ -1178,6 +1232,9 @@ DEF(mmap_self_fix_1_start, 0x0)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x89F3CD) //data 0x3C0C33
+DEF(aslr_fix_end, aslr_fix_start+2)
 
 DEF(sigaction_fix_start, -0x6f6b12) //data 0x5694EE
 DEF(sigaction_fix_end, -0x6f6ae8) //data 0x569518
@@ -1257,6 +1314,9 @@ DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
 
+DEF(aslr_fix_start, -0x890F17) //data 0x3BF0E9
+DEF(aslr_fix_end, aslr_fix_start+2)
+
 DEF(sigaction_fix_start, -0x6F02DD) //data 0x55FD23
 DEF(sigaction_fix_end, -0x6F02C2) //data 0x55FD3E
 DEF(sysents, 0x1B7030) //data 0xE07030
@@ -1334,6 +1394,9 @@ DEF(mmap_self_fix_1_start, 0x0)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x890F17) //data 0x3BF0E9
+DEF(aslr_fix_end, aslr_fix_start+2)
 
 DEF(sigaction_fix_start, -0x6F02DD) //data 0x55FD23
 DEF(sigaction_fix_end, -0x6F02C2) //data 0x55FD3E
@@ -1413,6 +1476,9 @@ DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
 
+DEF(aslr_fix_start, -0x890C10) //data 0x3BF3F0
+DEF(aslr_fix_end, aslr_fix_start+2)
+
 DEF(sigaction_fix_start, -0x6EFFDD) //data 0x560023
 DEF(sigaction_fix_end, -0x6EFFC2) //data 0x56003E
 DEF(sysents, 0x1B71A0) //data 0xE071A0
@@ -1490,6 +1556,9 @@ DEF(mmap_self_fix_1_start, 0x0)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x890C10) //data 0x3BF3F0
+DEF(aslr_fix_end, aslr_fix_start+2)
 
 DEF(sigaction_fix_start, -0x6EFFDD) //data 0x560023
 DEF(sigaction_fix_end, -0x6EFFC2) //data 0x56003E
@@ -1569,6 +1638,9 @@ DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, 0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
 
+DEF(aslr_fix_start, -0x890C00) //data 0x3BF400
+DEF(aslr_fix_end, aslr_fix_start+2)
+
 DEF(sigaction_fix_start, -0x6EFFCD) //data 0x560033
 DEF(sigaction_fix_end, -0x6EFFB2) //data 0x56004E
 DEF(sysents, 0x1B7260) //data 0xE07260
@@ -1646,6 +1718,9 @@ DEF(mmap_self_fix_1_start, -0x0)
 DEF(mmap_self_fix_1_end, mmap_self_fix_1_start+2)
 DEF(mmap_self_fix_2_start, -0x0)
 DEF(mmap_self_fix_2_end, mmap_self_fix_2_start+2)
+
+DEF(aslr_fix_start, -0x890C00) //data 0x3BF400
+DEF(aslr_fix_end, aslr_fix_start+2)
 
 DEF(sigaction_fix_start, -0x6EFFCD) //data 0x560033
 DEF(sigaction_fix_end, -0x6EFFB2) //data 0x56004E
