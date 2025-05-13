@@ -1,4 +1,4 @@
-name: CI
+name: Rebuild With New SDK
 
 on:
   push:
