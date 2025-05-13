@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install build-essential clang-15 lld-15 xxd yasm nasm
+        sudo apt install build-essential clang-18 lld-18 xxd yasm nasm
 
     - name: Install toolchain
       run: |
