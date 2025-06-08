@@ -1578,23 +1578,23 @@ static struct PARASITES(14) parasites_700 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{0x837AEC, RDI}, // ?
+        //{-0x837AEC, RDI}, // ?
         {0x837AEC, R13}, //data 0x418514
         {0x3A400C, RSI}, //data 0x8ABFF4
         {0x3A3FCC, RSI}, //data 0x8AC034
         /* fself parasites */
-        {0x2E2EC6, RAX}, //data 0x96D13A
-        {0x2E39FA, RAX}, //data 0x96C606
-        {0x2E38C0, RAX}, //data 0x96C740
-        {0x2E362B, RAX}, //data 0x96C9D5
-        {0x2E335D, RAX}, //data 0x96CCA3
-        {0x2E303E, RDX}, //data 0x96CFC2
-        {0x2E3032, RCX}, //data 0x96CFCE
-        {0x9CCCCC, RDI}, //data 0x283334
-        {0x2E3496, R10}, //data 0x96CB6A
+        {-0x2E2EC6, RAX}, //data 0x96D13A
+        {-0x2E39FA, RAX}, //data 0x96C606
+        {-0x2E38C0, RAX}, //data 0x96C740
+        {-0x2E362B, RAX}, //data 0x96C9D5
+        {-0x2E335D, RAX}, //data 0x96CCA3
+        {-0x2E303E, RDX}, //data 0x96CFC2
+        {-0x2E3032, RCX}, //data 0x96CFCE
+        {-0x9CCCCC, RDI}, //data 0x283334
+        {-0x2E3496, R10}, //data 0x96CB6A
         /* unsorted parasites */
-        {0x4918AE, RAX}, //data 0x7BE752
-        {0x4918AE, R15}, //data 0x7BE752
+        {-0x4918AE, RAX}, //data 0x7BE752
+        {-0x4918AE, R15}, //data 0x7BE752
     }
 };
 
@@ -1604,23 +1604,23 @@ static struct PARASITES(14) parasites_701 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{0x837AEC, RDI}, // ?
-        {0x837AEC, R13}, //data 0x418514 
-        {0x3A400C, RSI}, //data 0x8ABFF4
-        {0x3A3FCC, RSI}, //data 0x8AC034
+        //{-0x837AEC, RDI}, // ?
+        {-0x837AEC, R13}, //data 0x418514 
+        {-0x3A400C, RSI}, //data 0x8ABFF4
+        {-0x3A3FCC, RSI}, //data 0x8AC034
         /* fself parasites */
-        {0x2E2EC6, RAX}, //data 0x96D13A
-        {0x2E39FA, RAX}, //data 0x96C606
-        {0x2E38C0, RAX}, //data 0x96C740
-        {0x2E362B, RAX}, //data 0x96C9D5
-        {0x2E335D, RAX}, //data 0x96CCA3
-        {0x2E303E, RDX}, //data 0x96CFC2
-        {0x2E3032, RCX}, //data 0x96CFCE
-        {0x9CCCCC, RDI}, //data 0x283334
-        {0x2E3496, R10}, //data 0x96CB6A
+        {-0x2E2EC6, RAX}, //data 0x96D13A
+        {-0x2E39FA, RAX}, //data 0x96C606
+        {-0x2E38C0, RAX}, //data 0x96C740
+        {-0x2E362B, RAX}, //data 0x96C9D5
+        {-0x2E335D, RAX}, //data 0x96CCA3
+        {-0x2E303E, RDX}, //data 0x96CFC2
+        {-0x2E3032, RCX}, //data 0x96CFCE
+        {-0x9CCCCC, RDI}, //data 0x283334
+        {-0x2E3496, R10}, //data 0x96CB6A
         /* unsorted parasites */
-        {0x4918AE, RAX}, //data 0x7BE752
-        {0x4918AE, R15}, //data 0x7BE752
+        {-0x4918AE, RAX}, //data 0x7BE752
+        {-0x4918AE, R15}, //data 0x7BE752
     }
 };
 
@@ -1630,23 +1630,23 @@ static struct PARASITES(14) parasites_720 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{0x8377EC, RDI}, // ?
-        {0x8377EC, R13}, //data 0x418814
-        {0x3A3D0C, RSI}, //data 0x8AC2F4
-        {0x3A3CCC, RSI}, //data 0x8AC334
+        //{-0x8377EC, RDI}, // ?
+        {-0x8377EC, R13}, //data 0x418814
+        {-0x3A3D0C, RSI}, //data 0x8AC2F4
+        {-0x3A3CCC, RSI}, //data 0x8AC334
         /* fself parasites */
-        {0x2E2BC6, RAX}, //data 0x96D43A
-        {0x2E36FA, RAX}, //data 0x96C906
-        {0x2E35C0, RAX}, //data 0x96CA40
-        {0x2E332B, RAX}, //data 0x96CCD5
-        {0x2E305D, RAX}, //data 0x96CFA3
-        {0x2E2D3E, RDX}, //data 0x96D2C2
-        {0x2E2D32, RCX}, //data 0x96D2CE
-        {0x9CCA8C, RDI}, //data 0x283574
-        {0x2E3196, R10}, //data 0x96CE6A
+        {-0x2E2BC6, RAX}, //data 0x96D43A
+        {-0x2E36FA, RAX}, //data 0x96C906
+        {-0x2E35C0, RAX}, //data 0x96CA40
+        {-0x2E332B, RAX}, //data 0x96CCD5
+        {-0x2E305D, RAX}, //data 0x96CFA3
+        {-0x2E2D3E, RDX}, //data 0x96D2C2
+        {-0x2E2D32, RCX}, //data 0x96D2CE
+        {-0x9CCA8C, RDI}, //data 0x283574
+        {-0x2E3196, R10}, //data 0x96CE6A
         /* unsorted parasites */
-        {0x4915AE, RAX}, //data 0x7BEA52
-        {0x4915AE, R15}, //data 0x7BEA52
+        {-0x4915AE, RAX}, //data 0x7BEA52
+        {-0x4915AE, R15}, //data 0x7BEA52
     }
 };
 
@@ -1656,23 +1656,23 @@ static struct PARASITES(14) parasites_740 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{0x8377EC, RDI}, // ?
-        {0x8377EC, R13}, //data 0x418814 
-        {0x3A3D0C, RSI}, //data 0x8AC2F4
-        {0x3A3CCC, RSI}, //data 0x8AC334
+        //{-0x8377EC, RDI}, // ?
+        {-0x8377EC, R13}, //data 0x418814 
+        {-0x3A3D0C, RSI}, //data 0x8AC2F4
+        {-0x3A3CCC, RSI}, //data 0x8AC334
         /* fself parasites */
-        {0x2E2BC6, RAX}, //data 0x96D43A
-        {0x2E36FA, RAX}, //data 0x96C906
-        {0x2E35C0, RAX}, //data 0x96CA40
-        {0x2E332B, RAX}, //data 0x96CCD5
-        {0x2E305D, RAX}, //data 0x96CFA3
-        {0x2E2D3E, RDX}, //data 0x96D2C2
-        {0x2E2D32, RCX}, //data 0x96D2CE
-        {0x9CCA8C, RDI}, //data 0x283574
-        {0x2E3196, R10}, //data 0x96CE6A
+        {-0x2E2BC6, RAX}, //data 0x96D43A
+        {-0x2E36FA, RAX}, //data 0x96C906
+        {-0x2E35C0, RAX}, //data 0x96CA40
+        {-0x2E332B, RAX}, //data 0x96CCD5
+        {-0x2E305D, RAX}, //data 0x96CFA3
+        {-0x2E2D3E, RDX}, //data 0x96D2C2
+        {-0x2E2D32, RCX}, //data 0x96D2CE
+        {-0x9CCA8C, RDI}, //data 0x283574
+        {-0x2E3196, R10}, //data 0x96CE6A
         /* unsorted parasites */
-        {0x4915AE, RAX}, //data 0x7BEA52
-        {0x4915AE, R15}, //data 0x7BEA52
+        {-0x4915AE, RAX}, //data 0x7BEA52
+        {-0x4915AE, R15}, //data 0x7BEA52
     }
 };
 
@@ -1682,23 +1682,23 @@ static struct PARASITES(14) parasites_760 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{0x8377DC, RDI}, // ?
-        {0x8377DC, R13}, //data 0x418824
-        {0x3A3BCC, RSI}, //data 0x8AC434
-        {0x3A3B8C, RSI}, //data 0x8AC474
+        //{-0x8377DC, RDI}, // ?
+        {-0x8377DC, R13}, //data 0x418824
+        {-0x3A3BCC, RSI}, //data 0x8AC434
+        {-0x3A3B8C, RSI}, //data 0x8AC474
         /* fself parasites */
-        {0x2E2A86, RAX}, //data 0x96D57A
-        {0x2E35BA, RAX}, //data 0x96CA46
-        {0x2E3480, RAX}, //data 0x96CB80
-        {0x2E31EB, RAX}, //data 0x96CE15
-        {0x2E2F1D, RAX}, //data 0x96D0E3
-        {0x2E2BFE, RDX}, //data 0x96D402
-        {0x2E2BF2, RCX}, //data 0x96D40E
-        {0x9CCA8C, RDI}, //data 0x283574
-        {0x2E3056, R10}, //data 0x96CFAA
+        {-0x2E2A86, RAX}, //data 0x96D57A
+        {-0x2E35BA, RAX}, //data 0x96CA46
+        {-0x2E3480, RAX}, //data 0x96CB80
+        {-0x2E31EB, RAX}, //data 0x96CE15
+        {-0x2E2F1D, RAX}, //data 0x96D0E3
+        {-0x2E2BFE, RDX}, //data 0x96D402
+        {-0x2E2BF2, RCX}, //data 0x96D40E
+        {-0x9CCA8C, RDI}, //data 0x283574
+        {-0x2E3056, R10}, //data 0x96CFAA
         /* unsorted parasites */
-        {0x49146E, RAX}, //data 0x7BEB92
-        {0x49146E, R15}, //data 0x7BEB92
+        {-0x49146E, RAX}, //data 0x7BEB92
+        {-0x49146E, R15}, //data 0x7BEB92
     }
 };
 
