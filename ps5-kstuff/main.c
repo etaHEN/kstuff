@@ -1708,7 +1708,7 @@ static struct PARASITES(14) parasites_761 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        {-0x8377DC, RDI}, // ?
+        //{-0x8377DC, RDI}, // ?
         {-0x8377DC, R13}, //data 0x418824  
         {-0x3A3BCC, RSI}, //data 0x8AC434
         {-0x3A3B8C, RSI}, //data 0x8AC474
