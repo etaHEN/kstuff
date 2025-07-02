@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <stdbool.h>
 #include "../prosper0gdb/r0gdb.h"
 #include "../prosper0gdb/offsets.h"
 #include "../gdb_stub/dbg.h"
