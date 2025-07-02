@@ -1,4 +1,4 @@
-name: Rebuild With New SDK
+name: Build Kstuff with the Latest Payload SDK
 
 on:
   push:
