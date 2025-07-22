@@ -28,10 +28,25 @@ jobs:
         sudo apt update
         sudo apt install build-essential clang-18 lld-18 xxd yasm nasm
 
-    - name: Install toolchain
+    - name: Get Latest SDK Release Info
+      id: sdk-release
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const release = await github.rest.repos.getLatestRelease({
+            owner: 'LightningMods',
+            repo: 'etaHEN-SDK'
+          });
+          core.setOutput('download_url', release.data.assets.find(asset => asset.name.endsWith('.zip')).browser_download_url);
+
+    - name: Download Latest SDK
       run: |
-        wget https://github.com/ps5-payload-dev/pacbrew-repo/releases/latest/download/ps5-payload-dev.tar.gz
-        sudo tar xf ps5-payload-dev.tar.gz -C /
+        curl -L "${{ steps.sdk-release.outputs.download_url }}" -o ps5-sdk.zip
+        mkdir -p ${{ runner.tool_cache }}/ps5-payload-sdk
+        unzip ps5-sdk.zip -d ${{ runner.tool_cache }}/ps5-payload-sdk
+        echo PS5_PAYLOAD_SDK=${{ runner.tool_cache }}/ps5-payload-sdk/ps5-payload-sdk >> $GITHUB_ENV
+        chmod 0777 -R ${{ runner.tool_cache }}/ps5-payload-sdk/ps5-payload-sdk 
 
     - name: Build Payload
       run: |
