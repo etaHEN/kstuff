@@ -2059,7 +2059,8 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d)
         copyout(&q, offsets.security_flags, 4);
         q |= 0x14;        
         copyin(offsets.security_flags, &q, 4);
-        copyin(offsets.targetid, "\x82", 1);
+	if(!sceKernelIsTestKit())
+            copyin(offsets.targetid, "\x82", 1);
         copyout(&q, offsets.qa_flags, 4);
         q |= 0x1030300;
         copyin(offsets.qa_flags, &q, 4);
@@ -2093,3 +2094,4 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d)
     asm volatile("ud2");
     return 0;
 }
+
