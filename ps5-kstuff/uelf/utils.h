@@ -5,6 +5,7 @@
 #include "log.h"
 
 extern uint64_t cr3_phys;
+extern uint64_t cr3_phys_addr;
 extern uint64_t trap_frame;
 extern char pcpu[];
 extern char fwver[];
@@ -18,6 +19,8 @@ int copy_to_kernel(uint64_t dst, const void* src, uint64_t sz);
 void run_gadget(uint64_t* regs);
 void read_dbgregs(uint64_t* dr);
 void write_dbgregs(const uint64_t* dr);
+uint64_t read_cr0(void);
+void write_cr0(uint64_t);
 void start_syscall_with_dbgregs(uint64_t* regs, const uint64_t* dbgregs);
 void handle_utils_trap(uint64_t* regs, uint32_t trapno);
 void handle_syscall(uint64_t* regs, int allow_kekcall);

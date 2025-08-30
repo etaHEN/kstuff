@@ -483,20 +483,40 @@ void r0gdb_write_dbreg(int which, uint64_t value)
 uint64_t r0gdb_read_cr3(void)
 {
     struct regs regs = {0};
-    regs.rip = offsets.mov_rdi_cr3;
+    regs.rip = offsets.mov_rax_cr3;
     regs.rsp = kstack;
     regs.eflags = 0x102;
     run_in_kernel(&regs);
-    return regs.rdi;
+    return regs.rax;
 }
 
 void r0gdb_write_cr3(uint64_t cr3)
 {
     struct regs regs = {0};
-    regs.rip = offsets.mov_cr3_rax;
+    regs.rip = offsets.mov_cr3_rax_mov_ds;
     regs.rsp = kstack;
     regs.eflags = 0x102;
     regs.rax = cr3;
+    run_in_kernel(&regs);
+}
+
+uint64_t r0gdb_read_cr0(void)
+{
+    struct regs regs = {0};
+    regs.rip = offsets.mov_rax_cr0;
+    regs.rsp = kstack;
+    regs.eflags = 0x102;
+    run_in_kernel(&regs);
+    return regs.rax;
+}
+
+void r0gdb_write_cr0(uint64_t cr0)
+{
+    struct regs regs = {0};
+    regs.rip = offsets.mov_cr0_rax;
+    regs.rsp = kstack;
+    regs.eflags = 0x102;
+    regs.rax = cr0;
     run_in_kernel(&regs);
 }
 
@@ -1600,4 +1620,21 @@ uint32_t r0gdb_get_fw_version(void)
     unsigned int version = 0;
     sysctl(mib, 2, &version, &size, 0, 0);
     return version;
+}
+
+uintptr_t r0gdb_leak_fd(int which)
+{
+    uint64_t td = get_thread();
+    uint64_t proc = kread8(td+8);
+    uint64_t fd = kread8(proc+0x48);
+    uint64_t ofiles = kread8(fd);
+    uint64_t file = kread8(ofiles+48*which+8);
+    uint32_t count;
+    copyout(&count, file + 0x28, 4);
+    count++;
+    copyin(file + 0x28, &count, 4);
+    uint64_t file_value;
+    copyout(&file_value, file, 8);
+    close(which);
+    return file_value;
 }

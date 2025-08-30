@@ -75,3 +75,15 @@ p/x $crypt_message_resolve = kdata_base - 0x479d60
 p/x $crypt_get_algo_singleton = kdata_base - 0x410830
 p/x $crypt_singleton_array = kdata_base + 0x2e31830
 p/x $sceSblServiceCryptAsync_deref_singleton = kdata_base - 0x8ed902
+
+# reset-related shit
+p/x $vnlru_proc = kdata_base - 0x96bef0
+p/x $kproc_shutdown = kdata_base - 0x96ad58
+p/x $s_shutdown_pre_sync = kdata_base + 0x3dd917
+p/x $s_shutdown_final = kdata_base + 0x322db7
+p/x $s_kproc_shutdown = kdata_base + 0x3b0bdc
+p/x $eventhandler_register = kdata_base - 0x525820
+p/x $da_delete_trim = kdata_base - 0x96f268
+
+# uxen-related shit
+p/x $resumectx = kdata_base - 0x964308

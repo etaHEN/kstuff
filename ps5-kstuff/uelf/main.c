@@ -13,7 +13,11 @@
 #include "mailbox.h"
 #include "fself.h"
 #include "fpkg.h"
+#include "uexec.h"
 #include "syscall_fixes.h"
+#include "shared_area.h"
+#include "uexec.h"
+#include "npdrm.h"
 
 int have_error_code;
 
@@ -65,6 +69,9 @@ void handle_syscall(uint64_t* regs, int allow_kekcall)
     else if(IS(nmount)
          || IS(unmount))
         handle_fpkg_syscall(regs);
+    else if(IS(ioctl)
+         || IS_PPR(ioctl))
+        handle_ioctl_syscall(regs);
     else if(IS(mprotect)
          || IS_PPR(mdbg_call))
         handle_syscall_fix(regs);
@@ -76,6 +83,11 @@ void handle_syscall(uint64_t* regs, int allow_kekcall)
 
 void handle(uint64_t* regs)
 {
+    if(__atomic_load_n(&shared_area.uexec_counter, __ATOMIC_ACQUIRE))
+    {
+        uexec_ipi(regs);
+        return;
+    }
     if(!(regs[CS] & 3))
         regs[EFLAGS] |= 0x10000; //RF
     if((regs[CS] & 3) || (regs[EFLAGS] & 0x40000)) //from userspace, or from copyin/copyout
@@ -150,6 +162,7 @@ from_userspace:
         case TRAP_FSELF: handle_fself_trap(regs, TRAP_IDX(lr)); break;
         case TRAP_FPKG: handle_fpkg_trap(regs, TRAP_IDX(lr)); break;
 #endif
+        case TRAP_UEXEC: handle_uexec_trap(regs, TRAP_IDX(lr)); break;
         }
     }
 #ifndef FREEBSD
@@ -166,6 +179,8 @@ from_userspace:
     else if(try_handle_syscall_fix_trap(regs))
         return;
 #endif
+    else if(try_handle_uexec_trap(regs))
+        return;
     else
     {
         int decrypted = 0;

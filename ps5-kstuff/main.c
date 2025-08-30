@@ -1054,6 +1054,44 @@ static struct shellcore_patch shellcore_patches_761[] = {
     {0x690d40, "\x48\x31\xC0\xC3", 4}, //PKG Installer
 };
 
+static struct shellcore_patch shellcore_patches_800[] = {
+    {0xba85ce, "\x52\xeb\x08", 3}, //push rdx; jmp 0xBA85D9 **
+    {0xba85d9, "\xe8\xe2\xf6\xff\xff\x58\xc3", 7}, //call 0xBA7CC0; pop rax; ret **
+    //{0xba7cb2, "\xe0\x0a\x00\x00", 4},
+    {0xba7cb1, "\xe9\xae\xfd\xff\xff", 5},  // jmp 0xBA7A64 **
+    //{0xba8796, "\x31\xc0\x50\xe8\x22\xf5\xff\xff\x58\xc3", 10}, // xor eax,eax; push rax; call 0xBA7CC0; pop rax; ret
+    {0xba7a64, "\x31\xc0\x50\xe8\x54\x02\x00\x00\x58\xc3", 10}, //xor eax, eax; push rax; call 0xBA7CC0; pop rax; ret **
+
+    {0x6b27bd, "\xeb\x04", 2}, //jmp 0x6B27C3 **
+    {0x2f1a82, "\xeb\x04", 2}, //jmp 0x2F1A88 **
+    {0x2f1ed2, "\xeb\x04", 2}, //jmp 0x2F1ED8 **
+    {0x6d1cc1, "\xeb", 1}, //jmp **
+    {0x6baa05, "\x90\xe9", 2}, //nop; jmp **
+    {0x6d2a0d, "\xeb", 1}, //jmp **
+
+    {0x6d3f89, "\x61\x01\x00\x00", 4}, // 0x6D40EE **
+    {0x1f7272, "\xe8\x19\x3c\x5c\x00\x31\xc9\xff\xc1\xe9\xb3\x02\x00\x00", 14}, // call 0x7BAE90; xor ecx; inc ecx; jmp 0x1f7533 **
+    {0x1f7533, "\x83\xf8\x02\x0f\x43\xc1\xe9\xa7\xfb\xff\xff", 11},//cmp eax, 2; cmovae eax, ecx; jmp 0x1F70E5 **
+    {0x1f6f2e, "\xe9\x3f\x03\x00\x00", 5}, // JMP 0x1F7272 **
+
+	{0x6F08F0, "\xC3", 1}, // callback to sceRifManagerRegisterActivationCallback
+
+    {0x15fbe80, "\x31\xc0\xc3", 3}, // VR2 Min Fw Check
+    {0xa2cac6, "\xeb\x03", 2}, // disable game error message
+    {0x2ea51b, "\x90\xe9", 2}, // PS4 Disc Installer Patch 1
+    {0x2ea599, "\x90\xe9", 2}, // PS5 Disc Installer Patch 1
+    {0x2ea69c, "\xeb", 1}, // PS4 PKG Installer Patch 1
+    {0x2ea770, "\xeb", 1}, // PS5 PKG Installer Patch 1
+    {0x2eab57, "\x90\xe9", 2}, // PS4 PKG Installer Patch 2
+    {0x2eacdf, "\xeb", 1}, // PS5 PKG Installer Patch 2
+    {0x2eb09e, "\x90\xe9", 2}, // PS4 PKG Installer Patch 3
+    {0x2eb131, "\x90\xe9", 2}, // PS5 PKG Installer Patch 3
+    {0x6b14ca, "\xeb", 1}, // PS4 PKG Installer Patch 4
+    {0x6b4324, "\xeb", 1}, // PS5 PKG Installer Patch 4
+    {0x6b77b0, "\x48\x31\xc0\xc3", 4}, // PKG Installer
+};
+
+
 extern char _start[];
 
 static void relocate_shellcore_patches(struct shellcore_patch* patches, size_t n_patches)
@@ -1141,6 +1179,7 @@ static const struct shellcore_patch* get_shellcore_patches(size_t* n_patches)
     FW(740);
     FW(760);
     FW(761);
+    FW(800);	
     default:
         *n_patches = 1;
         return 0;
@@ -1475,23 +1514,23 @@ static struct PARASITES(14) parasites_550 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        // {-0x845c8c, RDI}, //data 0x40A374
-        {-0x835c8c, R13}, //data 0x40A374
-        {-0x39a12c, RSI}, //data 0x8A5ED4
-        {-0x39a0ec, RSI}, //data 0x8A5F14
+        // {-0x845c8c, RDI},
+        {-0x835c8c, R13},
+        {-0x39a12c, RSI},
+        {-0x39a0ec, RSI},
         /* fself parasites */
-        {-0x2dc116, RAX}, //data 0x963EEA
-        {-0x2dcc6a, RAX}, //data 0x963396
-        {-0x2dcb30, RAX}, //data 0x9634D0
-        {-0x2dc893, RAX}, //data 0x96376D
-        {-0x2dc5ad, RAX}, //data 0x963A53
-        {-0x2dc28e, RDX}, //data 0x963D72
-        {-0x2dc282, RCX}, //data 0x963D7E
-        {-0x9c6290, RDI}, //data 0x279D70
-        {-0x2dc6e6, R10}, //data 0x96391A
+        {-0x2dc116, RAX},
+        {-0x2dcc6a, RAX},
+        {-0x2dcb30, RAX},
+        {-0x2dc893, RAX},
+        {-0x2dc5ad, RAX},
+        {-0x2dc28e, RDX},
+        {-0x2dc282, RCX},
+        {-0x9c6290, RDI},
+        {-0x2dc6e6, R10},
         /* unsorted parasites */
-        {-0x48ad6e, RAX}, //data 0x7B5292
-        {-0x48ad6e, R15}, //data 0x7B5292
+        {-0x48ad6e, RAX},
+        {-0x48ad6e, R15},
     }
 };
 
@@ -1501,23 +1540,23 @@ static struct PARASITES(14) parasites_600 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{-0x844fcc, RDI}, //data 0x41B034
-        {-0x844fcc, R13}, //data 0x41B034
-        {-0x39bb9c, RSI}, //data 0x8C4464
-        {-0x39bb5c, RSI}, //data 0x8C44A4
+        //{-0x844fcc, RDI},
+        {-0x844fcc, R13},
+        {-0x39bb9c, RSI},
+        {-0x39bb5c, RSI},
         /* fself parasites */
-        {-0x2da786, RAX}, //data 0x98587A
-        {-0x2db2da, RAX}, //data 0x984D26
-        {-0x2db1a0, RAX}, //data 0x984E60
-        {-0x2daf03, RAX}, //data 0x9850FD
-        {-0x2dac1d, RAX}, //data 0x9853E3
-        {-0x2da8fe, RDX}, //data 0x985702
-        {-0x2da8f2, RCX}, //data 0x98570E
-        {-0x9dcad0, RDI}, //data 0x283530
-        {-0x2dad56, R10}, //data 0x9852AA
+        {-0x2da786, RAX},
+        {-0x2db2da, RAX},
+        {-0x2db1a0, RAX},
+        {-0x2daf03, RAX},
+        {-0x2dac1d, RAX},
+        {-0x2da8fe, RDX},
+        {-0x2da8f2, RCX},
+        {-0x9dcad0, RDI},
+        {-0x2dad56, R10},
         /* unsorted parasites */
-        {-0x48feae, RAX}, //data 0x7D0152
-        {-0x48feae, R15}, //data 0x7D0152
+        {-0x48feae, RAX},
+        {-0x48feae, R15},
     }
 };
 
@@ -1527,23 +1566,23 @@ static struct PARASITES(14) parasites_602 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{-0x844fcc, RDI}, //data 0x41B034
-        {-0x844fcc, R13}, //data 0x41B034
-        {-0x39bbbc, RSI}, //data 0x8C4444
-        {-0x39bb7c, RSI}, //data 0x8C4484
+        //{-0x844fcc, RDI},
+        {-0x844fcc, R13},
+        {-0x39bbbc, RSI},
+        {-0x39bb7c, RSI},
         /* fself parasites */
-        {-0x2da7a6, RAX}, //data 0x98585A
-        {-0x2db2fa, RAX}, //data 0x984D06
-        {-0x2db1c0, RAX}, //data 0x984E40
-        {-0x2daf23, RAX}, //data 0x9850DD
-        {-0x2dac3d, RAX}, //data 0x9853C3
-        {-0x2da91e, RDX}, //data 0x9856E2
-        {-0x2da912, RCX}, //data 0x9856EE
-        {-0x9dcad0, RDI}, //data 0x283530
-        {-0x2dad76, R10}, //data 0x98528A
+        {-0x2da7a6, RAX},
+        {-0x2db2fa, RAX},
+        {-0x2db1c0, RAX},
+        {-0x2daf23, RAX},
+        {-0x2dac3d, RAX},
+        {-0x2da91e, RDX},
+        {-0x2da912, RCX},
+        {-0x9dcad0, RDI},
+        {-0x2dad76, R10},
         /* unsorted parasites */
-        {-0x48fece, RAX}, //data 0x7D0132
-        {-0x48fece, R15}, //data 0x7D0132
+        {-0x48fece, RAX},
+        {-0x48fece, R15},
     }
 };
 
@@ -1553,23 +1592,23 @@ static struct PARASITES(14) parasites_650 = {
     .lim_total = 14,
     .parasites = {
         /* syscall parasites */
-        //{-0x844fac, RDI}, //data 0x41B054
-        {-0x844fac, R13}, //data 0x41B054
-        {-0x39b92c, RSI}, //data 0x8C46D4
-        {-0x39b8ec, RSI}, //data 0x8C4714
+        //{-0x844fac, RDI},
+        {-0x844fac, R13},
+        {-0x39b92c, RSI},
+        {-0x39b8ec, RSI},
         /* fself parasites */
-        {-0x2da016, RAX}, //data 0x985FEA
-        {-0x2dab6a, RAX}, //data 0x985496
-        {-0x2daa30, RAX}, //data 0x9855D0
-        {-0x2da793, RAX}, //data 0x98586D
-        {-0x2da4ad, RAX}, //data 0x985B53
-        {-0x2da18e, RDX}, //data 0x985E72
-        {-0x2da182, RCX}, //data 0x985E7E
-        {-0x9dcad0, RDI}, //data 0x283530
-        {-0x2da5e6, R10}, //data 0x985A1A
+        {-0x2da016, RAX},
+        {-0x2dab6a, RAX},
+        {-0x2daa30, RAX},
+        {-0x2da793, RAX},
+        {-0x2da4ad, RAX},
+        {-0x2da18e, RDX},
+        {-0x2da182, RCX},
+        {-0x9dcad0, RDI},
+        {-0x2da5e6, R10},
         /* unsorted parasites */
-        {-0x48fd0e, RAX}, //data 0x7D02F2
-        {-0x48fd0e, R15}, //data 0x7D02F2
+        {-0x48fd0e, RAX},
+        {-0x48fd0e, R15},
     }
 };
 static struct PARASITES(14) parasites_700 = {
@@ -1579,22 +1618,22 @@ static struct PARASITES(14) parasites_700 = {
     .parasites = {
         /* syscall parasites */
         //{-0x837AEC, RDI}, // ?
-        {0x837AEC, R13}, //data 0x418514
-        {0x3A400C, RSI}, //data 0x8ABFF4
-        {0x3A3FCC, RSI}, //data 0x8AC034
+        {-0x837AEC, R13},
+        {-0x3A400C, RSI},
+        {-0x3A3FCC, RSI},
         /* fself parasites */
-        {-0x2E2EC6, RAX}, //data 0x96D13A
-        {-0x2E39FA, RAX}, //data 0x96C606
-        {-0x2E38C0, RAX}, //data 0x96C740
-        {-0x2E362B, RAX}, //data 0x96C9D5
-        {-0x2E335D, RAX}, //data 0x96CCA3
-        {-0x2E303E, RDX}, //data 0x96CFC2
-        {-0x2E3032, RCX}, //data 0x96CFCE
-        {-0x9CCCCC, RDI}, //data 0x283334
-        {-0x2E3496, R10}, //data 0x96CB6A
+        {-0x2E2EC6, RAX},
+        {-0x2E39FA, RAX},
+        {-0x2E38C0, RAX},
+        {-0x2E362B, RAX},
+        {-0x2E335D, RAX},
+        {-0x2E303E, RDX},
+        {-0x2E3032, RCX},
+        {-0x9CCCCC, RDI},
+        {-0x2E3496, R10},
         /* unsorted parasites */
-        {-0x4918AE, RAX}, //data 0x7BE752
-        {-0x4918AE, R15}, //data 0x7BE752
+        {-0x4918AE, RAX},
+        {-0x4918AE, R15},
     }
 };
 
@@ -1605,22 +1644,22 @@ static struct PARASITES(14) parasites_701 = {
     .parasites = {
         /* syscall parasites */
         //{-0x837AEC, RDI}, // ?
-        {-0x837AEC, R13}, //data 0x418514 
-        {-0x3A400C, RSI}, //data 0x8ABFF4
-        {-0x3A3FCC, RSI}, //data 0x8AC034
+        {-0x837AEC, R13}, 
+        {-0x3A400C, RSI},
+        {-0x3A3FCC, RSI},
         /* fself parasites */
-        {-0x2E2EC6, RAX}, //data 0x96D13A
-        {-0x2E39FA, RAX}, //data 0x96C606
-        {-0x2E38C0, RAX}, //data 0x96C740
-        {-0x2E362B, RAX}, //data 0x96C9D5
-        {-0x2E335D, RAX}, //data 0x96CCA3
-        {-0x2E303E, RDX}, //data 0x96CFC2
-        {-0x2E3032, RCX}, //data 0x96CFCE
-        {-0x9CCCCC, RDI}, //data 0x283334
-        {-0x2E3496, R10}, //data 0x96CB6A
+        {-0x2E2EC6, RAX},
+        {-0x2E39FA, RAX},
+        {-0x2E38C0, RAX},
+        {-0x2E362B, RAX},
+        {-0x2E335D, RAX},
+        {-0x2E303E, RDX},
+        {-0x2E3032, RCX},
+        {-0x9CCCCC, RDI},
+        {-0x2E3496, R10},
         /* unsorted parasites */
-        {-0x4918AE, RAX}, //data 0x7BE752
-        {-0x4918AE, R15}, //data 0x7BE752
+        {-0x4918AE, RAX},
+        {-0x4918AE, R15},
     }
 };
 
@@ -1631,22 +1670,22 @@ static struct PARASITES(14) parasites_720 = {
     .parasites = {
         /* syscall parasites */
         //{-0x8377EC, RDI}, // ?
-        {-0x8377EC, R13}, //data 0x418814
-        {-0x3A3D0C, RSI}, //data 0x8AC2F4
-        {-0x3A3CCC, RSI}, //data 0x8AC334
+        {-0x8377EC, R13},
+        {-0x3A3D0C, RSI},
+        {-0x3A3CCC, RSI},
         /* fself parasites */
-        {-0x2E2BC6, RAX}, //data 0x96D43A
-        {-0x2E36FA, RAX}, //data 0x96C906
-        {-0x2E35C0, RAX}, //data 0x96CA40
-        {-0x2E332B, RAX}, //data 0x96CCD5
-        {-0x2E305D, RAX}, //data 0x96CFA3
-        {-0x2E2D3E, RDX}, //data 0x96D2C2
-        {-0x2E2D32, RCX}, //data 0x96D2CE
-        {-0x9CCA8C, RDI}, //data 0x283574
-        {-0x2E3196, R10}, //data 0x96CE6A
+        {-0x2E2BC6, RAX},
+        {-0x2E36FA, RAX},
+        {-0x2E35C0, RAX},
+        {-0x2E332B, RAX},
+        {-0x2E305D, RAX},
+        {-0x2E2D3E, RDX},
+        {-0x2E2D32, RCX},
+        {-0x9CCA8C, RDI},
+        {-0x2E3196, R10},
         /* unsorted parasites */
-        {-0x4915AE, RAX}, //data 0x7BEA52
-        {-0x4915AE, R15}, //data 0x7BEA52
+        {-0x4915AE, RAX},
+        {-0x4915AE, R15},
     }
 };
 
@@ -1657,22 +1696,22 @@ static struct PARASITES(14) parasites_740 = {
     .parasites = {
         /* syscall parasites */
         //{-0x8377EC, RDI}, // ?
-        {-0x8377EC, R13}, //data 0x418814 
-        {-0x3A3D0C, RSI}, //data 0x8AC2F4
-        {-0x3A3CCC, RSI}, //data 0x8AC334
+        {-0x8377EC, R13}, 
+        {-0x3A3D0C, RSI},
+        {-0x3A3CCC, RSI},
         /* fself parasites */
-        {-0x2E2BC6, RAX}, //data 0x96D43A
-        {-0x2E36FA, RAX}, //data 0x96C906
-        {-0x2E35C0, RAX}, //data 0x96CA40
-        {-0x2E332B, RAX}, //data 0x96CCD5
-        {-0x2E305D, RAX}, //data 0x96CFA3
-        {-0x2E2D3E, RDX}, //data 0x96D2C2
-        {-0x2E2D32, RCX}, //data 0x96D2CE
-        {-0x9CCA8C, RDI}, //data 0x283574
-        {-0x2E3196, R10}, //data 0x96CE6A
+        {-0x2E2BC6, RAX},
+        {-0x2E36FA, RAX},
+        {-0x2E35C0, RAX},
+        {-0x2E332B, RAX},
+        {-0x2E305D, RAX},
+        {-0x2E2D3E, RDX},
+        {-0x2E2D32, RCX},
+        {-0x9CCA8C, RDI},
+        {-0x2E3196, R10},
         /* unsorted parasites */
-        {-0x4915AE, RAX}, //data 0x7BEA52
-        {-0x4915AE, R15}, //data 0x7BEA52
+        {-0x4915AE, RAX},
+        {-0x4915AE, R15},
     }
 };
 
@@ -1683,22 +1722,22 @@ static struct PARASITES(14) parasites_760 = {
     .parasites = {
         /* syscall parasites */
         //{-0x8377DC, RDI}, // ?
-        {-0x8377DC, R13}, //data 0x418824
-        {-0x3A3BCC, RSI}, //data 0x8AC434
-        {-0x3A3B8C, RSI}, //data 0x8AC474
+        {-0x8377DC, R13},
+        {-0x3A3BCC, RSI},
+        {-0x3A3B8C, RSI},
         /* fself parasites */
-        {-0x2E2A86, RAX}, //data 0x96D57A
-        {-0x2E35BA, RAX}, //data 0x96CA46
-        {-0x2E3480, RAX}, //data 0x96CB80
-        {-0x2E31EB, RAX}, //data 0x96CE15
-        {-0x2E2F1D, RAX}, //data 0x96D0E3
-        {-0x2E2BFE, RDX}, //data 0x96D402
-        {-0x2E2BF2, RCX}, //data 0x96D40E
-        {-0x9CCA8C, RDI}, //data 0x283574
-        {-0x2E3056, R10}, //data 0x96CFAA
+        {-0x2E2A86, RAX},
+        {-0x2E35BA, RAX},
+        {-0x2E3480, RAX},
+        {-0x2E31EB, RAX},
+        {-0x2E2F1D, RAX},
+        {-0x2E2BFE, RDX},
+        {-0x2E2BF2, RCX},
+        {-0x9CCA8C, RDI},
+        {-0x2E3056, R10},
         /* unsorted parasites */
-        {-0x49146E, RAX}, //data 0x7BEB92
-        {-0x49146E, R15}, //data 0x7BEB92
+        {-0x49146E, RAX},
+        {-0x49146E, R15},
     }
 };
 
@@ -1709,22 +1748,50 @@ static struct PARASITES(14) parasites_761 = {
     .parasites = {
         /* syscall parasites */
         //{-0x8377DC, RDI}, // ?
-        {-0x8377DC, R13}, //data 0x418824  
-        {-0x3A3BCC, RSI}, //data 0x8AC434
-        {-0x3A3B8C, RSI}, //data 0x8AC474
+        {-0x8377DC, R13},  
+        {-0x3A3BCC, RSI},
+        {-0x3A3B8C, RSI},
         /* fself parasites */
-        {-0x2E2A86, RAX}, //data 0x96D57A
-        {-0x2E35BA, RAX}, //data 0x96CA46
-        {-0x2E3480, RAX}, //data 0x96CB80
-        {-0x2E31EB, RAX}, //data 0x96CE15
-        {-0x2E2F1D, RAX}, //data 0x96D0E3
-        {-0x2E2BFE, RDX}, //data 0x96D402
-        {-0x2E2BF2, RCX}, //data 0x96D40E
-        {-0x9CCA8C, RDI}, //data 0x283574
-        {-0x2E3056, R10}, //data 0x96CFAA
+        {-0x2E2A86, RAX},
+        {-0x2E35BA, RAX},
+        {-0x2E3480, RAX},
+        {-0x2E31EB, RAX},
+        {-0x2E2F1D, RAX},
+        {-0x2E2BFE, RDX},
+        {-0x2E2BF2, RCX},
+        {-0x9CCA8C, RDI},
+        {-0x2E3056, R10},
         /* unsorted parasites */
-        {-0x49146E, RAX}, //data 0x7BEB92
-        {-0x49146E, R15}, //data 0x7BEB92
+        {-0x49146E, RAX},
+        {-0x49146E, R15},
+    }
+};
+
+static struct PARASITES(14) parasites_800 = {
+    .lim_syscall = 3,
+    .lim_fself = 12,
+    .lim_total = 14,
+    .parasites = {
+        /* syscall parasites */
+        {-0x8574BE, R13},
+        {-0x3AE2BC, RSI},
+        {-0x3AE27C, RSI},
+        /* fself parasites */
+        {-0x2EC9F6, RAX},
+        {-0x2ED548, RAX},
+        {-0x2ED410, RAX},
+        {-0x2ED17B, RAX},
+        {-0x2ECEAD, RAX},
+        //{-0x2ECB76, RDX},
+		{-0x2ECB76, RAX},
+        //{-0x2ECB6A, RCX},
+		{-0x2ECB6A, RAX},
+        {-0x9ED0EC, RDI},
+        //{-0x2ECFE7, R10},
+        {-0x2ECFE7, RAX},
+        /* unsorted parasites */
+        {-0x49D6BF, RAX},
+        {-0x49D6BF, R15},
     }
 };
 
@@ -1799,7 +1866,10 @@ static struct parasite_desc* get_parasites(size_t* desc_size)
         return (void*)&parasites_760;
     case 0x761:
         *desc_size = sizeof(parasites_761);
-        return (void*)&parasites_761;
+        return (void*)&parasites_761;	
+    case 0x800:
+        *desc_size = sizeof(parasites_800);
+        return (void*)&parasites_800;		
     default:
         return 0;
 #else
@@ -1832,16 +1902,16 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d)
 {
     if(r0gdb_init(ds, a, b, c, d))
     {
-        #ifndef FIRMWARE_PORTING
+#ifndef FIRMWARE_PORTING
         notify("your firmware is not supported (prosper0gdb)");
         return 1;
-        #endif
+#endif
     }
 #ifdef PS5KEK
     extern uint64_t p_syscall;
     getpid();
     p_kekcall = (void*)p_syscall;
-#else    
+#else
     p_kekcall = (char*)dlsym((void*)0x1, "getpid") + 7;
 #endif
     if(!kekcall(0, 0, 0, 0, 0, 0, 0xffffffff00000027))
@@ -1941,7 +2011,6 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d)
     };
 	
     uint64_t fwver = r0gdb_get_fw_version() >> 16;
-		
     uint64_t values[] = {
         comparison_table,      // comparison_table
         dmem_virt_base,        // dmem
@@ -2041,12 +2110,13 @@ int main(void* ds, int a, int b, uintptr_t c, uintptr_t d)
     copyin(offsets.sysentvec_ps4 + 14, &(const uint16_t[1]){0xdeb7}, 2); //ps4 sysentvec
     copyin(offsets.crypt_singleton_array + 11*8 + 2*8 + 6, &(const uint16_t[1]){0xdeb7}, 2); //crypt xts
     copyin(offsets.crypt_singleton_array + 11*8 + 9*8 + 6, &(const uint16_t[1]){0xdeb7}, 2); //crypt hmac
-	if (fwver < 0x700)
+
+    if (fwver < 0x700)				   
     {
         //enable debug settings & spoof target
         uint32_t q = 0;
         copyout(&q, offsets.security_flags, 4);
-        q |= 0x14;        
+        q |= 0x14;
         copyin(offsets.security_flags, &q, 4);
         copyin(offsets.targetid, "\x82", 1);
         copyout(&q, offsets.qa_flags, 4);

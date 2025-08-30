@@ -3,7 +3,7 @@
 #undef __unix__
 
 /* disable XMM intrinsics */
-#undef __x86_64__
+//#undef __x86_64__
 
 /* for BearSSL */
 #define BR_64 1

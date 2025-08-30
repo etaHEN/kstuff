@@ -6,6 +6,7 @@ global memcpy
 global memset
 global memmove
 global cr3_phys
+global cr3_phys_addr
 global trap_frame
 global wrmsr_args
 global _start
@@ -57,10 +58,13 @@ ret
 ; rsi = cr3 of caller
 ; rdx = our cr3 (currently unused)
 ; rcx = justreturn frame (has saved rax/rcx/rdx)
+; r8 = wrmsr_args
+; r9 = cr3 on return
 _start:
 mov [rel trap_frame], rdi
 mov [rel cr3_phys], rsi
 mov [rel wrmsr_args], r8
+mov [rel cr3_phys_addr], r9
 xor rsp, rsp
 xchg rsp, [rel saved_rsp]
 test rsp, rsp
@@ -85,6 +89,8 @@ align 16
 trap_frame:
 resq 1
 cr3_phys:
+resq 1
+cr3_phys_addr:
 resq 1
 wrmsr_args:
 resq 1

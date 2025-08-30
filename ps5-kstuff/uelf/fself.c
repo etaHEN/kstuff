@@ -133,22 +133,26 @@ void handle_fself_syscall(uint64_t* regs)
 
 void handle_fself_trap(uint64_t* regs, uint32_t trapno)
 {
-    if(trapno == 1)
+    if (trapno == 1)
     {
-        uint64_t self_header = kpeek64(regs[R14] + 56);
+		uint64_t self_header = kpeek64(regs[(fwver >= 0x800) ? RBX : R14] + 56);
+
         char fself_header_backup[(48 + mini_syscore_header_size + 15) & -16];
         pop_stack(regs, fself_header_backup, sizeof(fself_header_backup));
+
         regs[RIP] = *(uint64_t*)(fself_header_backup + sizeof(fself_header_backup) - 8);
-        copy_to_kernel(self_header, fself_header_backup+40, mini_syscore_header_size);
+
+        copy_to_kernel(self_header, fself_header_backup + 40, mini_syscore_header_size);
     }
 }
+
 
 int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
 {
     if(lr == (uint64_t)sceSblServiceMailbox_lr_verifyHeader)
     {
-        uint64_t self_header = kpeek64(regs[R14] + 56);
-        uint32_t size;
+		uint64_t self_header = kpeek64(regs[(fwver >= 0x800) ? RBX : R14] + 56);
+		uint32_t size;
         copy_from_kernel(&size, regs[RDX]+16, 4);
         if(is_header_fself(self_header, size, 0, 0, 0, 0))
         {
@@ -169,7 +173,8 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     else if(lr == (uint64_t)sceSblServiceMailbox_lr_loadSelfSegment)
     {
         uint64_t ctx[8];
-        copy_from_kernel(ctx, regs[RBX], sizeof(ctx));
+        copy_from_kernel(ctx, (fwver >= 0x800) ? kpeek64(regs[RBP] - 240) : regs[RBX], sizeof(ctx));
+
         if(is_header_fself(ctx[7], (uint32_t)ctx[1], 0, 0, 0, 0))
         {
             pop_stack(regs, &regs[RIP], 8);
@@ -179,15 +184,15 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     else if(lr == (uint64_t)sceSblServiceMailbox_lr_decryptSelfBlock)
     {
         uint64_t ctx[8];
-     
-        if (fwver >= 0x500 && fwver <= 0x761) 
-        {
-            copy_from_kernel(ctx, kpeek64(regs[RBP] - 192), sizeof(ctx));
-        }
-        else
-        {
-            copy_from_kernel(ctx, kpeek64(regs[RBP] - sceSblServiceMailbox_decryptSelfBlock_rsp_to_rbp + sceSblServiceMailbox_decryptSelfBlock_rsp_to_self_context), sizeof(ctx));
-        }
+
+		copy_from_kernel(
+    		ctx,
+    		(fwver >= 0x800) ? regs[R12] :
+    		(fwver >= 0x500 && fwver <= 0x761) ? kpeek64(regs[RBP] - 192) :
+    		kpeek64(regs[RBP] - sceSblServiceMailbox_decryptSelfBlock_rsp_to_rbp +
+                     		sceSblServiceMailbox_decryptSelfBlock_rsp_to_self_context),
+    		sizeof(ctx)
+		);
 
         if(is_header_fself(ctx[7], (uint32_t)ctx[1], 0, 0, 0, 0))
         {
@@ -201,19 +206,13 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     else if(lr == (uint64_t)sceSblServiceMailbox_lr_decryptMultipleSelfBlocks)
     {
         uint64_t ctx[8];
-		
-        if (fwver >= 0x600 && fwver <= 0x761) 
-        {
-        copy_from_kernel(ctx, kpeek64(regs[RBP] - 208), sizeof(ctx));
-        } 
-        else if (fwver >= 0x500 && fwver <= 0x550) 
-        {
-        copy_from_kernel(ctx, kpeek64(regs[RBP] - 216), sizeof(ctx));
-        } 
-        else 
-        {
-        copy_from_kernel(ctx, regs[R13], sizeof(ctx));
-        }
+		copy_from_kernel(
+    		ctx,
+    		(fwver >= 0x600) ? kpeek64(regs[RBP] - 208) :
+    		(fwver >= 0x500 && fwver <= 0x550) ? kpeek64(regs[RBP] - 216) :
+    		regs[R13],
+    		sizeof(ctx)
+		);
         
         if(is_header_fself(ctx[7], (uint32_t)ctx[1], 0, 0, 0, 0))
         {
@@ -266,13 +265,13 @@ int try_handle_fself_trap(uint64_t* regs)
             copy_to_kernel(regs[R8], p_authinfo, 0x88);
             pop_stack(regs, &regs[RIP], 8);
             regs[RAX] = 0;
-            copy_to_kernel(regs[RDI] + 62, &(const uint16_t[1]){0xdeb7}, 2);
-        
+            copy_to_kernel(regs[RDI] + 62, &(const uint16_t[1]){0xdeb7}, 2);  
         }
     }
     else if(regs[RIP] == (uint64_t)loadSelfSegment_watchpoint)
     {
-        regs[R10] |= 0xffffull << 48;
+        regs[(fwver >= 0x800) ? RAX : R10] |= 0xffffull << 48;
+		
         uint64_t frame[4];
         copy_from_kernel(frame, regs[RSP], sizeof(frame));
         if(frame[3] == (uint64_t)loadSelfSegment_watchpoint_lr)

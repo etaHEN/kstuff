@@ -84,6 +84,9 @@ uint64_t r0gdb_kmalloc(size_t sz);
 //get current firmware version
 uint32_t r0gdb_get_fw_version(void);
 
+//close the fd, without actually closing the underlying file
+uint64_t r0gdb_leak_fd(int which);
+
 /* internals */
 
 extern uint64_t kstack;

@@ -1221,6 +1221,7 @@ static void unblock_signals(void)
 	ss.__bits[_SIG_WORD(SIGINT)] |= _SIG_BIT(SIGINT);
 	ss.__bits[_SIG_WORD(SIGSYS)] |= _SIG_BIT(SIGSYS);
 	ss.__bits[_SIG_WORD(SIGSEGV)] |= _SIG_BIT(SIGSEGV);
+	ss.__bits[_SIG_WORD(SIGFPE)] |= _SIG_BIT(SIGFPE);
     sigprocmask(SIG_UNBLOCK, &ss, NULL);
 #else
     sigset_t ss;
@@ -1231,6 +1232,7 @@ static void unblock_signals(void)
     sigaddset(&ss, SIGINT);
     sigaddset(&ss, SIGSYS);
     sigaddset(&ss, SIGSEGV);
+    sigaddset(&ss, SIGFPE);
     pthread_sigmask(SIG_UNBLOCK, &ss, NULL);
 #endif
 }
@@ -1288,8 +1290,9 @@ void real_dbg_enter(uint64_t* rsp)
     int c = sigaction(SIGBUS, &siga, NULL);
     int d = sigaction(SIGINT, &siga, NULL);
     int e = sigaction(SIGSYS, &siga, NULL);
+    int f = sigaction(SIGFPE, &siga, NULL);
     siga.sa_sigaction = tmp_sigsegv;
-    int f = sigaction(SIGSEGV, &siga, NULL);
+    int g = sigaction(SIGSEGV, &siga, NULL);
 #ifdef STDIO_REDIRECT
     gdb_setup_redir();
 #endif

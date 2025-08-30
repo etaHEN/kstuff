@@ -1,13 +1,7 @@
-#include "fakekeys.h"
 #include <stdint.h>
 #include <string.h>
-
-extern struct
-{
-    uint64_t bitmask;
-    char pad[24];
-    char key_data[63][32];
-} shared_area;
+#include "fakekeys.h"
+#include "shared_area.h"
 
 int register_fake_key(const char key_data[32])
 {

@@ -98,6 +98,8 @@ extern char gpr2dr_2_start[];
 extern char rdmsr_start[];
 extern char rdmsr_end[];
 extern char wrmsr_ret[];
+extern char mov_rax_cr0[];
+extern char mov_cr0_rax[];
 extern char doreti_iret[];
 extern char syscall_after[];
 
@@ -154,6 +156,24 @@ int wrmsr(uint32_t which, uint64_t value)
     };
     run_gadget(regs);
     return regs[RIP] != (uint64_t)wrmsr_ret;
+}
+
+uint64_t read_cr0(void)
+{
+    uint64_t regs[NREGS] = {
+        [RIP] = (uint64_t)mov_rax_cr0, 0x20, 0x102, 0, 0,
+    };
+    run_gadget(regs);
+    return regs[RAX];
+}
+
+void write_cr0(uint64_t cr0)
+{
+    uint64_t regs[NREGS] = {
+        [RIP] = (uint64_t)mov_cr0_rax, 0x20, 0x102, 0, 0,
+        [RAX] = cr0,
+    };
+    run_gadget(regs);
 }
 
 void start_syscall_with_dbgregs(uint64_t* regs, const uint64_t* dbgregs)

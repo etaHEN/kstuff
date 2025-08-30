@@ -6,6 +6,7 @@
 #include "kekcall.h"
 #include "traps.h"
 #include "utils.h"
+#include "uexec.h"
 
 extern char syscall_after[];
 extern char doreti_iret[];
@@ -49,7 +50,7 @@ int handle_kekcall(uint64_t* regs, uint64_t* args, uint32_t nr)
         return rdmsr(args[RDI], &args[RAX]) ? 0 : EFAULT;
     }
     //nr 4 reserved for wrmsr
-    else if(nr == 5)
+    else if(nr == 5) //remote syscall
     {
         uint64_t stack_frame[16] = {(uint64_t)doreti_iret, MKTRAP(TRAP_KEKCALL, 2)};
         stack_frame[6] = args[RDI];
@@ -61,6 +62,8 @@ int handle_kekcall(uint64_t* regs, uint64_t* args, uint32_t nr)
         regs[RDX] = 48;
         regs[RIP] = (uint64_t)copyin;
     }
+    else if(nr == 11)
+        return handle_uexec(regs, args);
     else if(nr == 0xffffffff)
     {
         args[RAX] = 0;

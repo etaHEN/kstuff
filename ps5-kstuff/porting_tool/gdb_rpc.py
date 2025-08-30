@@ -90,18 +90,17 @@ class GDB:
         with open('../../'+path, 'rb') as file:
             data = memoryview(file.read())
         while True:
-            with socket.socket() as sock:
-                sock.settimeout(5)
-                print('Connecting to PS5...', end='')
-                sys.stdout.flush()
-                while True:
-                    try: sock.connect((self.ps5_ip, self.ps5_port))
-                    except socket.error:
-                        sys.stdout.write('.')
-                        sys.stdout.flush()
-                        time.sleep(1)
-                        continue
-                    break
+            print('Connecting to PS5...', end='')
+            sys.stdout.flush()
+            while True:
+                try: sock = socket.create_connection((self.ps5_ip, self.ps5_port), timeout=5)
+                except socket.error:
+                    sys.stdout.write('.')
+                    sys.stdout.flush()
+                    time.sleep(1)
+                    continue
+                break
+            with sock:
                 sock.settimeout(None)
                 while data:
                     try: chk = sock.send(data)
@@ -189,6 +188,11 @@ class GDB:
             self.kill()
             raise DisconnectedException(ans)
         return ans
+    def struct_fields(self, expr, timeout=None):
+        if timeout is not None: timeout += time.time()
+        assert self.popen != None
+        self._write(('list(gdb.parse_and_eval('+repr(expr)+').type)\n').encode(), timeout)
+        return self._read_eval(timeout)
     def kill(self):
         if self.popen == None: return
         try: self.execute('p (int)kill(1, 30)', 5)

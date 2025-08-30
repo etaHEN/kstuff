@@ -8,3 +8,11 @@ Calls:
 * rax = 0x200000027, rdi = X -> copy dr0-dr3 and dr6-dr7 from user address X
 * rax = 0x300000027, rdi = X -> returns rdmsr(X)
 * rax = 0x500000027, rdi = pid, rsi = syscno, rdx = X -> call syscall in foreign process, with args read from user address X
+* rax = 0xb00000027, rdi = address, rsi = size, rdx = entry offset -> load a bare-metal payload to be run on shutdown
+** memory map:
+**  0000000000000000-0000008000000000  cached mapping of physical ram
+**  0000008000000000-0000010000000000  uncached mapping of physical ram
+**  0000010000000000-...               payload itself (not necessarily physically contigous)
+**  ffff800000000000-ffffffffffffffff  BSD kernel mappings (untouched)
+** all 16 cores (APIC ids 0-15) start in x86_64 ring3 with EFLAGS=2 (interrupts disabled, IOPL=0)
+** on startup, rdi=cr3, other general-purpose registers are zeroed

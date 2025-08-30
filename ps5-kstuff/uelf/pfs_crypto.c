@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include "pfs_crypto.h"
 #include "utils.h"
+#include "fpu.h"
 
 #include "../BearSSL/inc/bearssl.h"
 #include "../libtomcrypt/src/headers/tomcrypt.h"
@@ -30,25 +31,31 @@ static void pfs_gen_key(uint32_t idx, const uint8_t* seed, const uint8_t* ekpfs,
 
 int pfs_derive_fake_keys(const uint8_t* p_eekpfs, const uint8_t* crypt_seed, uint8_t* ek, uint8_t* sk)
 {
+    uelf_fpu_enter();
+    int ans = 0;
     uint8_t eekpfs[256];
     memcpy(eekpfs, p_eekpfs, 256);
     if(!br_rsa_i62_public(eekpfs, 256, &ypkg))
-        return 0;
+        goto exit;
     if(eekpfs[0] != 0 || eekpfs[1] != 2)
-        return 0;
+        goto exit;
     size_t idx = 1;
     while(idx < 256 && eekpfs[idx])
         idx++;
     if(idx != 255 - 32)
-        return 0;
+        goto exit;
     uint8_t* ekpfs = eekpfs+idx+1;
     pfs_gen_key(1, crypt_seed, ekpfs, ek);
     pfs_gen_key(2, crypt_seed, ekpfs, sk);
-    return 1;
+    ans = 1;
+exit:
+    uelf_fpu_exit();
+    return ans;
 }
 
 int pfs_hmac_virtual(uint8_t* out, const uint8_t* key, uint64_t data, size_t data_size)
 {
+    uelf_fpu_enter();
     br_hmac_key_context key_ctx;
     br_hmac_key_init(&key_ctx, &br_sha256_vtable, key, 32);
     br_hmac_context ctx;
@@ -58,7 +65,10 @@ int pfs_hmac_virtual(uint8_t* out, const uint8_t* key, uint64_t data, size_t dat
         uint64_t chunk_cur;
         uint64_t chunk_end;
         if(!virt2phys(data, &chunk_cur, &chunk_end))
+        {
+            uelf_fpu_exit();
             return -1;
+        }
         size_t chk = chunk_end - chunk_cur;
         if(chk > data_size)
             chk = data_size;
@@ -67,6 +77,7 @@ int pfs_hmac_virtual(uint8_t* out, const uint8_t* key, uint64_t data, size_t dat
         data_size -= chk;
     }
     br_hmac_out(&ctx, out);
+    uelf_fpu_exit();
     return 0;
 }
 
@@ -74,6 +85,8 @@ int pfs_xts_virtual(uint64_t dst, uint64_t src, const uint8_t* key, uint64_t sta
 {
     enum { SECTOR_SIZE = 4096 };
     static int aes_cipher = -1;
+    int ans = -1;
+    uelf_fpu_enter();
     if(aes_cipher < 0)
     {
         aes_cipher = register_cipher(&aes_desc);
@@ -81,7 +94,7 @@ int pfs_xts_virtual(uint64_t dst, uint64_t src, const uint8_t* key, uint64_t sta
         {
             log_word(0xdeaddeaddeaddead);
             log_word(aes_cipher);
-            return -1;
+            goto exit;
         }
     }
     symmetric_xts xts = {};
@@ -91,18 +104,21 @@ int pfs_xts_virtual(uint64_t dst, uint64_t src, const uint8_t* key, uint64_t sta
         static uint8_t input[SECTOR_SIZE], output[SECTOR_SIZE];
         uint64_t tweak[2] = {start, 0};
         if(copy_from_kernel(input, src, SECTOR_SIZE))
-            return -1;
+            goto exit;
         if(is_encrypt)
             xts_encrypt(input, SECTOR_SIZE, output, (void*)tweak, &xts);
         else
             xts_decrypt(input, SECTOR_SIZE, output, (void*)tweak, &xts);
         if(copy_to_kernel(dst, output, SECTOR_SIZE))
-            return -1;
+            goto exit;
         dst += SECTOR_SIZE;
         src += SECTOR_SIZE;
         start++;
     }
     xts_done(&xts);
-    return 0;
+    ans = 0;
+exit:
+    uelf_fpu_exit();
+    return ans;
 }
 #endif
