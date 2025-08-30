@@ -27,12 +27,14 @@ CFLAGS := -Wall -Werror
 
 all: kstuff.elf
 
-payload_bin.c: ../ps5-kstuff/payload.bin
+payload_bin.c: ../ps5-kstuff/payload.bin 
+	make -C ../ps5-kstuff/
 	xxd -i $^ > $@
 
 kstuff.elf: payload_bin.c main.c sqlite_triggers.c
 	$(CC) -o $@ main.c sqlite_triggers.c -lsqlite3
-
+	strip $@
+	
 clean:
 	rm -f payload_bin.c *.o *.elf
 

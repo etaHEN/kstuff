@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "traps.h"
 #include "log.h"
+#include "syscall_fixes.h"
 
 #ifndef FREEBSD
 
@@ -105,8 +106,8 @@ static uint64_t dbgregs_for_fself[6] = {
     (uint64_t)mmap_self_fix_1_start, (uint64_t)mmap_self_fix_2_start,
     0, 0x455,
 #else
-    0, 0,
-    0, 0x405,
+    (uint64_t) aslr_fix_start, 0,
+    0, 0x415,
 #endif
 };
 
@@ -178,7 +179,16 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     else if(lr == (uint64_t)sceSblServiceMailbox_lr_decryptSelfBlock)
     {
         uint64_t ctx[8];
-        copy_from_kernel(ctx, kpeek64(regs[RBP] - sceSblServiceMailbox_decryptSelfBlock_rsp_to_rbp + sceSblServiceMailbox_decryptSelfBlock_rsp_to_self_context), sizeof(ctx));
+     
+        if (fwver >= 0x500 && fwver <= 0x761) 
+        {
+            copy_from_kernel(ctx, kpeek64(regs[RBP] - 192), sizeof(ctx));
+        }
+        else
+        {
+            copy_from_kernel(ctx, kpeek64(regs[RBP] - sceSblServiceMailbox_decryptSelfBlock_rsp_to_rbp + sceSblServiceMailbox_decryptSelfBlock_rsp_to_self_context), sizeof(ctx));
+        }
+
         if(is_header_fself(ctx[7], (uint32_t)ctx[1], 0, 0, 0, 0))
         {
             uint64_t request[8];
@@ -191,7 +201,20 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     else if(lr == (uint64_t)sceSblServiceMailbox_lr_decryptMultipleSelfBlocks)
     {
         uint64_t ctx[8];
+		
+        if (fwver >= 0x600 && fwver <= 0x761) 
+        {
+        copy_from_kernel(ctx, kpeek64(regs[RBP] - 208), sizeof(ctx));
+        } 
+        else if (fwver >= 0x500 && fwver <= 0x550) 
+        {
+        copy_from_kernel(ctx, kpeek64(regs[RBP] - 216), sizeof(ctx));
+        } 
+        else 
+        {
         copy_from_kernel(ctx, regs[R13], sizeof(ctx));
+        }
+        
         if(is_header_fself(ctx[7], (uint32_t)ctx[1], 0, 0, 0, 0))
         {
             uint64_t request[8];
@@ -207,6 +230,7 @@ int try_handle_fself_mailbox(uint64_t* regs, uint64_t lr)
     }
     else
         return 0;
+
     return 1;
 }
 
@@ -243,6 +267,7 @@ int try_handle_fself_trap(uint64_t* regs)
             pop_stack(regs, &regs[RIP], 8);
             regs[RAX] = 0;
             copy_to_kernel(regs[RDI] + 62, &(const uint16_t[1]){0xdeb7}, 2);
+        
         }
     }
     else if(regs[RIP] == (uint64_t)loadSelfSegment_watchpoint)
