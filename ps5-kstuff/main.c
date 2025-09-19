@@ -1210,6 +1210,10 @@ static struct shellcore_patch shellcore_patches_840[] = {
     {0x6b438a, "\xeb", 1}, // PS4 PKG Installer Patch 4
     {0x6b71d4, "\xeb", 1}, // PS5 PKG Installer Patch 4
     {0x6ba660, "\x48\x31\xc0\xc3", 4}, // PKG Installer
+
+    {0x5d7823, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsDevelopmentMode)
+    {0x5d785d, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsAssistMode)
+    {0x13fb020, "\x55\x48\x89\xE5\xB8\x14\x26\x18\x80\x5D\xC3", 11}, // disable game update
 };
 
 static struct shellcore_patch shellcore_patches_860[] = {
@@ -1243,6 +1247,10 @@ static struct shellcore_patch shellcore_patches_860[] = {
     {0x6B421A, "\xeb", 1}, // PS4 PKG Installer Patch 4
     {0x6B7064, "\xeb", 1}, // PS5 PKG Installer Patch 4
     {0x6BA4F0, "\x48\x31\xc0\xc3", 4}, // PKG Installer
+
+    {0x5d7603, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsDevelopmentMode)
+    {0x5d763d, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsAssistMode)
+    {0x13fb040, "\x55\x48\x89\xE5\xB8\x14\x26\x18\x80\x5D\xC3", 11}, // disable game update
 };
 
 static struct shellcore_patch shellcore_patches_900[] = {
@@ -1276,6 +1284,10 @@ static struct shellcore_patch shellcore_patches_900[] = {
     {0x6F088A, "\xeb", 1}, // PS4 PKG Installer Patch 4
     {0x6F37C4, "\xeb", 1}, // PS5 PKG Installer Patch 4
     {0x6F6E40, "\x48\x31\xc0\xc3", 4}, // PKG Installer
+
+    {0x60c1fd, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsDevelopmentMode)
+    {0x60c231, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsAssistMode)
+    {0x14868c0, "\x55\x48\x89\xE5\xB8\x14\x26\x18\x80\x5D\xC3", 11}, // disable game update
 };
 
 static struct shellcore_patch shellcore_patches_920[] = {
@@ -1309,6 +1321,10 @@ static struct shellcore_patch shellcore_patches_920[] = {
     {0x6F05FA, "\xeb", 1}, // PS4 PKG Installer Patch 4
     {0x6F3534, "\xeb", 1}, // PS5 PKG Installer Patch 4
     {0x6F6B80, "\x48\x31\xc0\xc3", 4}, // PKG Installer
+
+    {0x60bf1d, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsDevelopmentMode)
+    {0x60bf51, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsAssistMode)
+    {0x1486fa0, "\x55\x48\x89\xE5\xB8\x14\x26\x18\x80\x5D\xC3", 11}, // disable game update
 };
 
 static struct shellcore_patch shellcore_patches_940[] = {
@@ -1342,6 +1358,10 @@ static struct shellcore_patch shellcore_patches_940[] = {
     {0x6F0CCA, "\xeb", 1}, // PS4 PKG Installer Patch 4
     {0x6F3C04, "\xeb", 1}, // PS5 PKG Installer Patch 4
     {0x6F7250, "\x48\x31\xc0\xc3", 4}, // PKG Installer
+
+    {0x60c5ed, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsDevelopmentMode)
+    {0x60c621, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsAssistMode)
+    {0x1487740, "\x55\x48\x89\xE5\xB8\x14\x26\x18\x80\x5D\xC3", 11}, // disable game update
 };
 
 static struct shellcore_patch shellcore_patches_960[] = {
@@ -1375,6 +1395,10 @@ static struct shellcore_patch shellcore_patches_960[] = {
     {0x6F0D3A, "\xeb", 1}, // PS4 PKG Installer Patch 4
     {0x6F3C74, "\xeb", 1}, // PS5 PKG Installer Patch 4
     {0x6F72C0, "\x48\x31\xc0\xc3", 4}, // PKG Installer
+
+    {0x60c65d, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsDevelopmentMode)
+    {0x60c691, "\xb8\x01\x00\x00\x00", 5}, // /data mount patch (sceKernelIsAssistMode)
+    {0x148fb10, "\x55\x48\x89\xE5\xB8\x14\x26\x18\x80\x5D\xC3", 11}, // disable game update
 };
 
 extern char _start[];
